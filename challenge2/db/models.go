@@ -1,11 +1,11 @@
 package db
 
 type Account struct {
-	User_id  uint   `json:"user_id"`
-	Username string `json:"username" binding:"required"`
-	Email    string `json:"email" binding:"required"`
-	Role_id  uint   `json:"role_id,string"`
-	Password string `json:"password" binding:"required"`
+	User_id  uint   `json:"user_id" gorm:"primaryKey"`
+	Username string `json:"username" validate:"required"`
+	Email    string `json:"email" validate:"contains=@"`
+	Role_id  uint   `json:"role_id,string" validate:"number"`
+	Password string `json:"password" validate:"min=8"`
 }
 
 type Role struct {

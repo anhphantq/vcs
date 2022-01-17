@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"challenge2/db"
 	"fmt"
 	"net/http"
 	"strings"
@@ -29,6 +30,9 @@ func verifyToken(tokenString string) (token *jwt.Token, err error) {
 
 func AuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
+		connection := db.GetDatabase()
+		defer db.Closedatabase(connection)
+
 		authorizationHeader := c.GetHeader(authorizationHeaderKey)
 		if len(authorizationHeader) == 0 {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "authorization header is not provided"})
@@ -52,24 +56,39 @@ func AuthMiddleware() gin.HandlerFunc {
 			return
 		}
 
-		if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
-			exp, ok := claims["exp"].(float64)
-			if !ok {
-				c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "invalid token format (expire time)"})
-				return
-			}
-			if (int64)(exp) < time.Now().Unix() {
-				c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "token is expired"})
-				return
-			}
-
-			c.Set("email", claims["email"])
-			c.Set("role", claims["role"])
-
-			c.Next()
-		} else {
+		claims, ok := token.Claims.(jwt.MapClaims)
+		if !ok || !token.Valid {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "some thing went wrong when getting token claim"})
 			return
 		}
+
+		exp, ok := claims["exp"].(float64)
+		if !ok {
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "invalid token format (expire time)"})
+			return
+		}
+
+		if (int64)(exp) < time.Now().Unix() {
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "token is expired"})
+			return
+		}
+
+		email, ok := claims["email"]
+		if email, ok = email.(string); !ok {
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "can not get email from jwt"})
+			return
+		}
+
+		var user db.Account
+		connection.Where("email = ?", email).Find(&user)
+
+		if email == "" {
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"msg": "user not found"})
+			return
+		}
+
+		c.Set("user", user)
+
+		c.Next()
 	}
 }

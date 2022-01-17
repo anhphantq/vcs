@@ -9,7 +9,7 @@ import (
 func main() {
 	mainRouter := gin.Default()
 
-	userRouter := mainRouter.Group("/user-management/user")
+	userRouter := mainRouter.Group("/user-management/")
 	router.InitUserRouter(userRouter)
 
 	mainRouter.Run(":8080")

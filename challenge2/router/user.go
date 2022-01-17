@@ -5,10 +5,12 @@ import (
 	"challenge2/middleware"
 	"fmt"
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator/v10"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -27,6 +29,13 @@ func SignUp(c *gin.Context) {
 
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, err)
+		return
+	}
+
+	validate := validator.New()
+
+	if err = validate.Struct(user); err != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "validation error"})
 		return
 	}
 
@@ -110,27 +119,150 @@ func SignIn(c *gin.Context) {
 }
 
 func hdGetUser(c *gin.Context) {
+	tmp, _ := c.Get("user")
+	user, _ := tmp.(db.Account)
 
+	c.JSON(http.StatusAccepted, gin.H{"user_id": user.User_id, "username": user.Username, "email": user.Email, "role_id": user.User_id})
 }
 
 func hdDeleteUser(c *gin.Context) {
+	tmp, _ := c.Get("user")
+	user, _ := tmp.(db.Account)
 
+	connection := db.GetDatabase()
+	defer db.Closedatabase(connection)
+
+	result := connection.Exec("delete from accounts where user_id = ?", user.User_id)
+
+	if result.Error != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"msg": "something went wrong when deleting account"})
+		return
+	}
+
+	c.JSON(http.StatusAccepted, gin.H{"msg": "account deleted"})
 }
 
 func hdPutUser(c *gin.Context) {
+	tmp, _ := c.Get("user")
+	user, _ := tmp.(db.Account)
 
+	var account db.Account
+
+	if err := c.ShouldBind(&account); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	if account.Password != "" {
+		user.Password = account.Password
+	}
+
+	if account.Username != "" {
+		user.Username = account.Username
+	}
+
+	validate := validator.New()
+	err := validate.Struct(user)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "validation error"})
+		return
+	}
+
+	if account.Password != "" {
+		user.Password, err = GeneratePassword(user.Password)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+	}
+
+	connection := db.GetDatabase()
+	defer db.Closedatabase(connection)
+
+	result := connection.Exec("update accounts SET username=?, email=?, password=? where user_id=?", user.Username, user.Email, user.Password, user.User_id)
+
+	if result.Error != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusAccepted, gin.H{"msg": "account updated"})
 }
 
 func hdGetUsers(c *gin.Context) {
+	connection := db.GetDatabase()
+	defer db.Closedatabase(connection)
 
+	var accounts []db.Account
+
+	result := connection.Raw("select * from accounts").Scan(&accounts)
+
+	if result.Error != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": result.Error.Error()})
+		return
+	}
+
+	c.JSON(http.StatusAccepted, accounts)
 }
 
 func hdDeleteUserById(c *gin.Context) {
+	connection := db.GetDatabase()
+	defer db.Closedatabase(connection)
+	id, err := strconv.Atoi(c.Param("id"))
 
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	result := connection.Exec("delete from accounts where user_id=?", id)
+
+	if result.Error != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.String(http.StatusAccepted, "User deleted")
 }
 
 func hdPutUserById(c *gin.Context) {
+	connection := db.GetDatabase()
+	defer db.Closedatabase(connection)
+	var account db.Account
 
+	id, err := strconv.Atoi(c.Param("id"))
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	if err := c.ShouldBind(&account); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	validate := validator.New()
+	err = validate.Struct(account)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "validation error"})
+		return
+	}
+
+	account.Password, err = GeneratePassword(account.Password)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	result := connection.Exec("update accounts SET username=?, role_id=?, password=? where user_id=?", account.Username, account.Role_id, account.Password, id)
+
+	if result.Error != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.String(http.StatusAccepted, "Info updated")
 }
 
 func InitUserRouter(router *gin.RouterGroup) {

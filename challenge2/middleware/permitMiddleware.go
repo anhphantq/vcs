@@ -12,16 +12,13 @@ func PermitMiddleware(permissionName string, scope string) gin.HandlerFunc {
 		connection := db.GetDatabase()
 		defer db.Closedatabase(connection)
 
-		email, ok := c.Get("email")
-		if email, ok = email.(string); !ok {
-			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "can not get email from jwt"})
+		tmp, _ := c.Get("user")
+		user, _ := tmp.(db.Account)
+
+		result := connection.Exec("select * from (select permission_id as ID from rolepermissions where role_id = ?) as permitID, permissions where permitID.ID = permissions.permission_id and permissions.name = ? and permissions.scope = ?", user.Role_id, permissionName, scope)
+		if result.RowsAffected < 1 || result.Error != nil {
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"msg": "permission denied"})
 			return
 		}
-
-		var user db.Account
-		connection.Where("email = ?", email).Find(&user)
-
-		connection.Exec("select from (select permission_id from rolespermissions where role_id == ?) as permitID, ")
-
 	}
 }
