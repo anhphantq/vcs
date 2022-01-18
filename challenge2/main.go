@@ -15,7 +15,8 @@ func main() {
 	roleRouter := mainRouter.Group("/user-management/role")
 	router.InitRoleRouter(roleRouter)
 
-	grant
+	grantRouter := mainRouter.Group("/user-management/grant")
+	router.InitGrantRouter(grantRouter)
 
 	mainRouter.Run(":8080")
 }

@@ -48,6 +48,9 @@ func hdUpdateRole(c *gin.Context) {
 }
 
 func hdDeleteRole(c *gin.Context) {
+	connection := db.GetDatabase()
+	defer db.Closedatabase(connection)
+
 	id, err := strconv.Atoi(c.Param("id"))
 
 	if err != nil {
@@ -55,7 +58,7 @@ func hdDeleteRole(c *gin.Context) {
 		return
 	}
 
-	result := db.Exec("delete from roles where role_id=?", id)
+	result := connection.Exec("delete from roles where role_id=?", id)
 
 	if result.Error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -66,8 +69,8 @@ func hdDeleteRole(c *gin.Context) {
 }
 
 func InitRoleRouter(router *gin.RouterGroup) {
-	router.GET("/", middleware.AuthRoleMiddleware(), hdGetRole)
-	router.POST("/", middleware.AuthRoleMiddleware(), hdCreateRole)
+	router.GET("/", middleware.AuthAdminMiddleware(), hdGetRole)
+	router.POST("/", middleware.AuthAdminMiddleware(), hdCreateRole)
 	// router.PUT("/", middleware.AuthRoleMiddleware(), hdUpdateRole)
-	router.DELETE("/:id", middleware.AuthRoleMiddleware(), hdDeleteRole)
+	router.DELETE("/:id", middleware.AuthAdminMiddleware(), hdDeleteRole)
 }

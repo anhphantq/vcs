@@ -13,7 +13,7 @@ func hdGetPermission(c *gin.Context) {
 	connection := db.GetDatabase()
 	defer db.Closedatabase(connection)
 
-	var permisisons []db.Permission
+	var permissions []db.Permission
 
 	result := connection.Raw("select * from permissions").Scan(&permissions)
 
@@ -30,12 +30,12 @@ func hdCreatePermission(c *gin.Context) {
 	defer db.Closedatabase(connection)
 
 	var permission db.Permission
-	if err := c.ShouldBind(&Permission); err != nil {
+	if err := c.ShouldBind(&permission); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	result := connection.Exec("insert into permissions values(default,?,?)", permission.name, permission.scope)
+	result := connection.Exec("insert into permissions values(default,?,?)", permission.Name, permission.Scope)
 	if result.Error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": result.Error.Error()})
 		return
@@ -48,6 +48,9 @@ func hdUpdatePermission(c *gin.Context) {
 }
 
 func hdDeletePermission(c *gin.Context) {
+	connection := db.GetDatabase()
+	defer db.Closedatabase(connection)
+
 	id, err := strconv.Atoi(c.Param("id"))
 
 	if err != nil {
@@ -55,7 +58,7 @@ func hdDeletePermission(c *gin.Context) {
 		return
 	}
 
-	result := db.Exec("delete from permissions where permission_id=?", id)
+	result := connection.Exec("delete from permissions where permission_id=?", id)
 
 	if result.Error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -65,9 +68,9 @@ func hdDeletePermission(c *gin.Context) {
 	c.String(http.StatusAccepted, "Permission deleted")
 }
 
-func InitRoleRouter(router *gin.RouterGroup) {
+func InitPermissionRouter(router *gin.RouterGroup) {
 	router.GET("/", middleware.AuthAdminMiddleware(), hdGetPermission)
 	router.POST("/", middleware.AuthAdminMiddleware(), hdCreatePermission)
 	// router.PUT("/", middleware.AuthRoleMiddleware(), hdUpdateRole)
-	router.DELETE("/:id", middleware.AuthAdmihMiddleware(), hdDeletePermission)
+	router.DELETE("/:id", middleware.AuthAdminMiddleware(), hdDeletePermission)
 }
