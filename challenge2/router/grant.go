@@ -9,7 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func hdGetRole(c *gin.Context) {
+func hdGetGrant(c *gin.Context) {
 	connection := db.GetDatabase()
 	defer db.Closedatabase(connection)
 
@@ -25,7 +25,7 @@ func hdGetRole(c *gin.Context) {
 	c.JSON(http.StatusAccepted, roles)
 }
 
-func hdCreateRole(c *gin.Context) {
+func hdCreateGrant(c *gin.Context) {
 	connection := db.GetDatabase()
 	defer db.Closedatabase(connection)
 
@@ -44,10 +44,10 @@ func hdCreateRole(c *gin.Context) {
 	c.String(http.StatusAccepted, "Role created")
 }
 
-func hdUpdateRole(c *gin.Context) {
+func hdUpdateGrant(c *gin.Context) {
 }
 
-func hdDeleteRole(c *gin.Context) {
+func hdDeleteGrant(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 
 	if err != nil {
@@ -65,7 +65,7 @@ func hdDeleteRole(c *gin.Context) {
 	c.String(http.StatusAccepted, "Role deleted")
 }
 
-func InitRoleRouter(router *gin.RouterGroup) {
+func InitGrantRouter(router *gin.RouterGroup) {
 	router.GET("/", middleware.AuthRoleMiddleware(), hdGetRole)
 	router.POST("/", middleware.AuthRoleMiddleware(), hdCreateRole)
 	// router.PUT("/", middleware.AuthRoleMiddleware(), hdUpdateRole)

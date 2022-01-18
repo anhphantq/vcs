@@ -269,11 +269,11 @@ func InitUserRouter(router *gin.RouterGroup) {
 	router.POST("/signup", SignUp)
 	router.POST("/signin", SignIn)
 
-	router.GET("/user", middleware.AuthMiddleware(), middleware.PermitMiddleware("get", "self"), hdGetUser)
-	router.DELETE("/user", middleware.AuthMiddleware(), middleware.PermitMiddleware("delete", "self"), hdDeleteUser)
-	router.PUT("/user", middleware.AuthMiddleware(), middleware.PermitMiddleware("put", "self"), hdPutUser)
+	router.GET("/", middleware.AuthMiddleware(), middleware.PermitMiddleware("get", "self"), hdGetUser)
+	router.DELETE("/", middleware.AuthMiddleware(), middleware.PermitMiddleware("delete", "self"), hdDeleteUser)
+	router.PUT("/", middleware.AuthMiddleware(), middleware.PermitMiddleware("put", "self"), hdPutUser)
 
-	router.GET("/users", middleware.AuthMiddleware(), middleware.PermitMiddleware("get", "all"), hdGetUsers)
-	router.DELETE("/users/:id", middleware.AuthMiddleware(), middleware.PermitMiddleware("delete", "all"), hdDeleteUserById)
-	router.PUT("/user/:id", middleware.AuthMiddleware(), middleware.PermitMiddleware("put", "all"), hdPutUserById)
+	router.GET("/all", middleware.AuthMiddleware(), middleware.PermitMiddleware("get", "all"), hdGetUsers)
+	router.DELETE("/all/:id", middleware.AuthMiddleware(), middleware.PermitMiddleware("delete", "all"), hdDeleteUserById)
+	router.PUT("/all/:id", middleware.AuthMiddleware(), middleware.PermitMiddleware("put", "all"), hdPutUserById)
 }

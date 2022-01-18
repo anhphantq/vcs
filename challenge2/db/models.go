@@ -10,7 +10,7 @@ type Account struct {
 
 type Role struct {
 	Role_id uint   `json:"role_id"`
-	Name    string `json:"name"`
+	Name    string `json:"name" binding:"required"`
 }
 
 type Permission struct {
