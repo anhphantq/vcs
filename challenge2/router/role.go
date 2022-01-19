@@ -15,7 +15,7 @@ func hdGetRole(c *gin.Context) {
 
 	var roles []db.Role
 
-	result := connection.Raw("select * from accounts").Scan(&roles)
+	result := connection.Raw("select * from roles").Scan(&roles)
 
 	if result.Error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": result.Error.Error()})
@@ -68,9 +68,8 @@ func hdDeleteRole(c *gin.Context) {
 	c.String(http.StatusAccepted, "Role deleted")
 }
 
-func InitRoleRouter(router *gin.RouterGroup) {
-	router.GET("/", middleware.AuthAdminMiddleware(), hdGetRole)
-	router.POST("/", middleware.AuthAdminMiddleware(), hdCreateRole)
-	// router.PUT("/", middleware.AuthRoleMiddleware(), hdUpdateRole)
+func initRoleRouter(router *gin.RouterGroup) {
+	router.GET("", middleware.AuthAdminMiddleware(), hdGetRole)
+	router.POST("", middleware.AuthAdminMiddleware(), hdCreateRole)
 	router.DELETE("/:id", middleware.AuthAdminMiddleware(), hdDeleteRole)
 }

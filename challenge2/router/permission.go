@@ -68,9 +68,8 @@ func hdDeletePermission(c *gin.Context) {
 	c.String(http.StatusAccepted, "Permission deleted")
 }
 
-func InitPermissionRouter(router *gin.RouterGroup) {
-	router.GET("/", middleware.AuthAdminMiddleware(), hdGetPermission)
-	router.POST("/", middleware.AuthAdminMiddleware(), hdCreatePermission)
-	// router.PUT("/", middleware.AuthRoleMiddleware(), hdUpdateRole)
+func initPermissionRouter(router *gin.RouterGroup) {
+	router.GET("", middleware.AuthAdminMiddleware(), hdGetPermission)
+	router.POST("", middleware.AuthAdminMiddleware(), hdCreatePermission)
 	router.DELETE("/:id", middleware.AuthAdminMiddleware(), hdDeletePermission)
 }

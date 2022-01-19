@@ -14,12 +14,12 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-func GeneratePassword(password string) (string, error) {
+func generatePassword(password string) (string, error) {
 	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
 	return string(bytes), err
 }
 
-func SignUp(c *gin.Context) {
+func signUp(c *gin.Context) {
 	connection := db.GetDatabase()
 	defer db.Closedatabase(connection)
 
@@ -47,7 +47,7 @@ func SignUp(c *gin.Context) {
 		return
 	}
 
-	user.Password, err = GeneratePassword(user.Password)
+	user.Password, err = generatePassword(user.Password)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Internal Error"})
 		return
@@ -62,12 +62,12 @@ func SignUp(c *gin.Context) {
 	c.String(http.StatusAccepted, "account created")
 }
 
-func CheckPasswordHash(password, hash string) bool {
+func checkPasswordHash(password, hash string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
 	return err == nil
 }
 
-func GenerateJWT(email string, role uint) (string, error) {
+func generateJWT(email string, role uint) (string, error) {
 	var mySigningKey = []byte("PhanDucAnh")
 	token := jwt.New(jwt.SigningMethodHS256)
 	claims := token.Claims.(jwt.MapClaims)
@@ -85,7 +85,7 @@ func GenerateJWT(email string, role uint) (string, error) {
 	return tokenString, nil
 }
 
-func SignIn(c *gin.Context) {
+func signIn(c *gin.Context) {
 	connection := db.GetDatabase()
 	defer db.Closedatabase(connection)
 
@@ -104,13 +104,13 @@ func SignIn(c *gin.Context) {
 		return
 	}
 
-	check := CheckPasswordHash(authDetails.Password, user.Password)
+	check := checkPasswordHash(authDetails.Password, user.Password)
 	if !check {
 		c.JSON(http.StatusForbidden, gin.H{"msg": "Incorrect Password or Email"})
 		return
 	}
 
-	validToken, err := GenerateJWT(user.Email, user.Role_id)
+	validToken, err := generateJWT(user.Email, user.Role_id)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"msg": "Can not generate JWT"})
 	}
@@ -169,7 +169,7 @@ func hdPutUser(c *gin.Context) {
 	}
 
 	if account.Password != "" {
-		user.Password, err = GeneratePassword(user.Password)
+		user.Password, err = generatePassword(user.Password)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
@@ -200,6 +200,10 @@ func hdGetUsers(c *gin.Context) {
 	if result.Error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": result.Error.Error()})
 		return
+	}
+
+	for i := range accounts {
+		accounts[i].Password = ""
 	}
 
 	c.JSON(http.StatusAccepted, accounts)
@@ -249,7 +253,7 @@ func hdPutUserById(c *gin.Context) {
 		return
 	}
 
-	account.Password, err = GeneratePassword(account.Password)
+	account.Password, err = generatePassword(account.Password)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -265,13 +269,13 @@ func hdPutUserById(c *gin.Context) {
 	c.String(http.StatusAccepted, "Info updated")
 }
 
-func InitUserRouter(router *gin.RouterGroup) {
-	router.POST("/signup", SignUp)
-	router.POST("/signin", SignIn)
+func initUserRouter(router *gin.RouterGroup) {
+	router.POST("/signup", signUp)
+	router.POST("/signin", signIn)
 
-	router.GET("/", middleware.AuthMiddleware(), middleware.PermitMiddleware("get", "self"), hdGetUser)
-	router.DELETE("/", middleware.AuthMiddleware(), middleware.PermitMiddleware("delete", "self"), hdDeleteUser)
-	router.PUT("/", middleware.AuthMiddleware(), middleware.PermitMiddleware("put", "self"), hdPutUser)
+	router.GET("", middleware.AuthMiddleware(), middleware.PermitMiddleware("get", "self"), hdGetUser)
+	router.DELETE("", middleware.AuthMiddleware(), middleware.PermitMiddleware("delete", "self"), hdDeleteUser)
+	router.PUT("", middleware.AuthMiddleware(), middleware.PermitMiddleware("put", "self"), hdPutUser)
 
 	router.GET("/all", middleware.AuthMiddleware(), middleware.PermitMiddleware("get", "all"), hdGetUsers)
 	router.DELETE("/all/:id", middleware.AuthMiddleware(), middleware.PermitMiddleware("delete", "all"), hdDeleteUserById)

@@ -2,10 +2,17 @@ package router
 
 import "github.com/gin-gonic/gin"
 
-func InitRouter() *gin.Engine {
-	router := gin.Default()
+func InitRouter(router *gin.Engine) {
 
-	InitUserRouter(router.Group("/user-management/"))
+	userRouter := router.Group("/user-management/user")
+	initUserRouter(userRouter)
 
-	return router
+	roleRouter := router.Group("/user-management/role")
+	initRoleRouter(roleRouter)
+
+	grantRouter := router.Group("/user-management/grant")
+	initGrantRouter(grantRouter)
+
+	permissionRouter := router.Group("/user-management/permission")
+	initPermissionRouter(permissionRouter)
 }

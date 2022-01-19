@@ -9,19 +9,19 @@ type Account struct {
 }
 
 type Role struct {
-	Role_id uint   `json:"role_id"`
+	Role_id uint   `json:"role_id,string"`
 	Name    string `json:"name" binding:"required"`
 }
 
 type Permission struct {
-	Permission_id uint   `json:"permission_id"`
+	Permission_id uint   `json:"permission_id,string"`
 	Name          string `json:"name"`
 	Scope         string `json:"scope"`
 }
 
 type RolePermission struct {
-	Role_id       uint `json:"role_id"`
-	Permission_id uint `json:"permission_id"`
+	Role_id       uint `json:"role_id,string"`
+	Permission_id uint `json:"permission_id,string"`
 }
 
 type Authentication struct {

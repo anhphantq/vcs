@@ -4,7 +4,6 @@ import (
 	"challenge2/db"
 	"challenge2/middleware"
 	"net/http"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -13,35 +12,35 @@ func hdGetGrant(c *gin.Context) {
 	connection := db.GetDatabase()
 	defer db.Closedatabase(connection)
 
-	var roles []db.Role
+	var rolepermissions []db.RolePermission
 
-	result := connection.Raw("select * from accounts").Scan(&roles)
+	result := connection.Raw("select * from rolepermissions").Scan(&rolepermissions)
 
 	if result.Error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": result.Error.Error()})
 		return
 	}
 
-	c.JSON(http.StatusAccepted, roles)
+	c.JSON(http.StatusAccepted, rolepermissions)
 }
 
 func hdCreateGrant(c *gin.Context) {
 	connection := db.GetDatabase()
 	defer db.Closedatabase(connection)
 
-	var role db.Role
-	if err := c.ShouldBind(&role); err != nil {
+	var rolepermission db.RolePermission
+	if err := c.ShouldBind(&rolepermission); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	result := connection.Exec("insert into roles values(default,?)", role.Name)
+	result := connection.Exec("insert into rolepermissions values(?,?)", rolepermission.Role_id, rolepermission.Permission_id)
 	if result.Error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": result.Error.Error()})
 		return
 	}
 
-	c.String(http.StatusAccepted, "Role created")
+	c.String(http.StatusAccepted, "Granted")
 }
 
 func hdUpdateGrant(c *gin.Context) {
@@ -50,26 +49,25 @@ func hdUpdateGrant(c *gin.Context) {
 func hdDeleteGrant(c *gin.Context) {
 	connection := db.GetDatabase()
 	defer db.Closedatabase(connection)
-	id, err := strconv.Atoi(c.Param("id"))
 
-	if err != nil {
+	var rolepermission db.RolePermission
+	if err := c.ShouldBind(&rolepermission); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	result := connection.Exec("delete from roles where role_id=?", id)
+	result := connection.Exec("delete from rolepermissions where role_id=? and permission_id=?", rolepermission.Role_id, rolepermission.Permission_id)
 
 	if result.Error != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"error": result.Error.Error()})
 		return
 	}
 
-	c.String(http.StatusAccepted, "Role deleted")
+	c.String(http.StatusAccepted, "Grant deleted")
 }
 
-func InitGrantRouter(router *gin.RouterGroup) {
-	router.GET("/", middleware.AuthAdminMiddleware(), hdGetRole)
-	router.POST("/", middleware.AuthAdminMiddleware(), hdCreateRole)
-	// router.PUT("/", middleware.AuthRoleMiddleware(), hdUpdateRole)
-	router.DELETE("/:id", middleware.AuthAdminMiddleware(), hdDeleteRole)
+func initGrantRouter(router *gin.RouterGroup) {
+	router.GET("", middleware.AuthAdminMiddleware(), hdGetGrant)
+	router.POST("", middleware.AuthAdminMiddleware(), hdCreateGrant)
+	router.DELETE("", middleware.AuthAdminMiddleware(), hdDeleteGrant)
 }
