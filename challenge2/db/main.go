@@ -9,7 +9,7 @@ import (
 )
 
 func GetDatabase() *gorm.DB {
-	connection, err := gorm.Open("postgres", "host=localhost port=5432 user=postgres dbname=challenge2 password=Phananh272")
+	connection, err := gorm.Open("postgres", "host=localhost port=5432 user=postgres sslmode=disable dbname=challenge2 password=Phananh272")
 	if err != nil {
 		log.Fatalln("wrong database url", err)
 	}

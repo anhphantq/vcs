@@ -100,7 +100,7 @@ func signIn(c *gin.Context) {
 	var user db.Account
 	connection.Where("email = ?", authDetails.Email).Find(&user)
 	if user.Email == "" {
-		c.JSON(http.StatusForbidden, gin.H{"msg": "Incorrect Password or Email"})
+		c.JSON(http.StatusBadRequest, gin.H{"msg": "Incorrect Password or Email"})
 		return
 	}
 
@@ -122,7 +122,7 @@ func hdGetUser(c *gin.Context) {
 	tmp, _ := c.Get("user")
 	user, _ := tmp.(db.Account)
 
-	c.JSON(http.StatusAccepted, gin.H{"user_id": user.User_id, "username": user.Username, "email": user.Email, "role_id": user.User_id})
+	c.JSON(http.StatusAccepted, gin.H{"user_id": user.User_id, "username": user.Username, "email": user.Email, "role_id": user.Role_id})
 }
 
 func hdDeleteUser(c *gin.Context) {
