@@ -17,47 +17,48 @@ func AuthAdminMiddleware() gin.HandlerFunc {
 
 		authorizationHeader := c.GetHeader(authorizationHeaderKey)
 		if len(authorizationHeader) == 0 {
-			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "authorization header is not provided"})
+			c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": "Authorization header is not provided"})
 			return
 		}
 
 		fields := strings.Fields(authorizationHeader)
 		if len(fields) < 2 {
-			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "invalid authorization header"})
+			c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": "Invalid authorization header"})
 			return
 		}
 
 		if strings.ToLower(fields[0]) != authorizationBearerType {
-			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "invalid authorization type"})
+			c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": "Invalid authorization type"})
 			return
 		}
 
 		token, err := verifyToken(fields[1])
 		if err != nil {
-			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"message": "Invalid JWT"})
 			return
 		}
 
 		claims, ok := token.Claims.(jwt.MapClaims)
 		if !ok || !token.Valid {
-			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "some thing went wrong when getting token claim"})
+			c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong when getting token claim"})
 			return
 		}
 
 		exp, ok := claims["exp"].(float64)
 		if !ok {
-			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "invalid token format (expire time)"})
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"message": "Invalid token format (expire time)"})
 			return
 		}
 
 		if (int64)(exp) < time.Now().Unix() {
-			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "token is expired"})
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"message": "Token is expired"})
 			return
 		}
 
-		email, ok := claims["email"]
-		if email, ok = email.(string); !ok {
-			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "can not get email from jwt"})
+		email, ok := claims["email"].(string)
+
+		if !ok {
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"message": "Invalid token format (email)"})
 			return
 		}
 
@@ -65,12 +66,12 @@ func AuthAdminMiddleware() gin.HandlerFunc {
 		connection.Where("email = ?", email).Find(&user)
 
 		if email == "" {
-			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"msg": "user not found"})
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"message": "User not found"})
 			return
 		}
 
 		if user.Role_id != 2 {
-			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"msg": "permission denied"})
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"message": "Permission denied"})
 			return
 		}
 

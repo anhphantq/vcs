@@ -17,7 +17,7 @@ func PermitMiddleware(permissionName string, scope string) gin.HandlerFunc {
 
 		result := connection.Exec("select * from (select permission_id as ID from rolepermissions where role_id = ?) as permitID, permissions where permitID.ID = permissions.permission_id and permissions.name = ? and permissions.scope = ?", user.Role_id, permissionName, scope)
 		if result.RowsAffected < 1 || result.Error != nil {
-			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"msg": "permission denied"})
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"message": "Permission denied"})
 			return
 		}
 	}

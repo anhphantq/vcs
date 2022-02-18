@@ -17,7 +17,7 @@ func hdGetGrant(c *gin.Context) {
 	result := connection.Raw("select * from rolepermissions").Scan(&rolepermissions)
 
 	if result.Error != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": result.Error.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
 		return
 	}
 
@@ -30,17 +30,17 @@ func hdCreateGrant(c *gin.Context) {
 
 	var rolepermission db.RolePermission
 	if err := c.ShouldBind(&rolepermission); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something when wrong in the server"})
 		return
 	}
 
 	result := connection.Exec("insert into rolepermissions values(?,?)", rolepermission.Role_id, rolepermission.Permission_id)
 	if result.Error != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": result.Error.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something when wrong in the server or the role had been granted"})
 		return
 	}
 
-	c.String(http.StatusAccepted, "Granted")
+	c.JSON(http.StatusAccepted, gin.H{"message": "Granted"})
 }
 
 func hdDeleteGrant(c *gin.Context) {
@@ -49,22 +49,27 @@ func hdDeleteGrant(c *gin.Context) {
 
 	var rolepermission db.RolePermission
 	if err := c.ShouldBind(&rolepermission); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something when wrong in the server"})
 		return
 	}
 
 	result := connection.Exec("delete from rolepermissions where role_id=? and permission_id=?", rolepermission.Role_id, rolepermission.Permission_id)
 
 	if result.Error != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": result.Error.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something when wrong in the server"})
 		return
 	}
 
-	c.String(http.StatusAccepted, "Grant deleted")
+	if result.RowsAffected < 1{
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Wrong role's ID or permission's ID"})
+		return
+	}
+
+	c.JSON(http.StatusAccepted, gin.H{"message": "Deleted"})
 }
 
 func initGrantRouter(router *gin.RouterGroup) {
-	router.GET("", middleware.AuthAdminMiddleware(), hdGetGrant)
-	router.POST("", middleware.AuthAdminMiddleware(), hdCreateGrant)
-	router.DELETE("", middleware.AuthAdminMiddleware(), hdDeleteGrant)
+	router.GET("/granting", middleware.ValidationMiddleware(templateRouter), middleware.AuthAdminMiddleware(), hdGetGrant)
+	router.POST("/granting", middleware.ValidationMiddleware(templateRouter), middleware.AuthAdminMiddleware(), hdCreateGrant)
+	router.DELETE("/granting", middleware.ValidationMiddleware(templateRouter), middleware.AuthAdminMiddleware(), hdDeleteGrant)
 }

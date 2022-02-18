@@ -12,22 +12,26 @@ import (
 var templateRouter routers.Router
 
 func InitRouter(router *gin.Engine) {
-	doc, err := openapi3.NewLoader().LoadFromFile("../api/api.yaml")
+	doc, err := openapi3.NewLoader().LoadFromFile("/Users/anhphantq/Desktop/Go/vcs/challenge3/api/api.yaml")
 	if (err != nil){
 		fmt.Print(err.Error())
 	}
 
-	templateRouter, _ = legacy.NewRouter(doc)
+	templateRouter, err = legacy.NewRouter(doc)
 
-	userRouter := router.Group("/user-management/user")
+	if (err != nil){
+		fmt.Print(err.Error())
+	}
+
+	userRouter := router.Group("/user-management")
 	initUserRouter(userRouter)
 
-	roleRouter := router.Group("/user-management/role")
+	roleRouter := router.Group("/role-management")
 	initRoleRouter(roleRouter)
 
-	grantRouter := router.Group("/user-management/grant")
+	grantRouter := router.Group("/granting-management")
 	initGrantRouter(grantRouter)
 
-	permissionRouter := router.Group("/user-management/permission")
+	permissionRouter := router.Group("/permission-management")
 	initPermissionRouter(permissionRouter)
 }

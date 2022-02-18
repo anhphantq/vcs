@@ -2,10 +2,10 @@ package db
 
 type Account struct {
 	User_id  uint   `json:"user_id" gorm:"primaryKey"`
-	Username string `json:"username" validate:"required"`
-	Email    string `json:"email" validate:"contains=@"`
-	Role_id  uint   `json:"role_id,string" validate:"number"`
-	Password string `json:"password" validate:"min=8"`
+	Username string `json:"username"`
+	Email    string `json:"email"`
+	Role_id  uint   `json:"role_id"`
+	Password string `json:"password"`
 }
 
 type Role struct {
@@ -20,8 +20,8 @@ type Permission struct {
 }
 
 type RolePermission struct {
-	Role_id       uint `json:"role_id,string"`
-	Permission_id uint `json:"permission_id,string"`
+	Role_id       uint `json:"role_id" form:"role_id"`
+	Permission_id uint `json:"permission_id" form:"permission_id"`
 }
 
 type Authentication struct {

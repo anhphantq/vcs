@@ -9,7 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func hdGetRole(c *gin.Context) {
+func hdGetRoles(c *gin.Context) {
 	connection := db.GetDatabase()
 	defer db.Closedatabase(connection)
 
@@ -18,7 +18,7 @@ func hdGetRole(c *gin.Context) {
 	result := connection.Raw("select * from roles").Scan(&roles)
 
 	if result.Error != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": result.Error.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
 		return
 	}
 
@@ -31,42 +31,78 @@ func hdCreateRole(c *gin.Context) {
 
 	var role db.Role
 	if err := c.ShouldBind(&role); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
 		return
 	}
 
 	result := connection.Exec("insert into roles values(default,?)", role.Name)
 	if result.Error != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": result.Error.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
 		return
 	}
 
-	c.String(http.StatusAccepted, "Role created")
+	c.JSON(http.StatusAccepted, gin.H{"message": "Role created"})
 }
 
-func hdDeleteRole(c *gin.Context) {
+func hdGetRoleByID(c *gin.Context) {
 	connection := db.GetDatabase()
 	defer db.Closedatabase(connection)
 
 	id, err := strconv.Atoi(c.Param("id"))
 
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
+		return
+	}
+
+	result := connection.Exec("select * from roles where role_id=?", id)
+
+	if result.Error != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
+		return
+	}
+
+	if result.RowsAffected < 1{
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Wrong role ID"})
+		return
+	}
+
+	var role db.Role
+
+	result.First(&role)
+
+	c.JSON(http.StatusAccepted, role)
+}
+
+func hdDeleteRoleByID(c *gin.Context) {
+	connection := db.GetDatabase()
+	defer db.Closedatabase(connection)
+
+	id, err := strconv.Atoi(c.Param("id"))
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
 		return
 	}
 
 	result := connection.Exec("delete from roles where role_id=?", id)
 
 	if result.Error != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
 		return
 	}
 
-	c.String(http.StatusAccepted, "Role deleted")
+	if result.RowsAffected < 1{
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Wrong role ID"})
+		return
+	}
+
+	c.JSON(http.StatusAccepted, gin.H{"message": "Role deleted"})
 }
 
 func initRoleRouter(router *gin.RouterGroup) {
-	router.GET("", middleware.AuthAdminMiddleware(), hdGetRole)
-	router.POST("", middleware.AuthAdminMiddleware(), hdCreateRole)
-	router.DELETE("/:id", middleware.AuthAdminMiddleware(), hdDeleteRole)
+	router.GET("/roles", middleware.ValidationMiddleware(templateRouter), middleware.AuthAdminMiddleware(), hdGetRoles)
+	router.POST("/roles", middleware.ValidationMiddleware(templateRouter), middleware.AuthAdminMiddleware(), hdCreateRole)
+	router.GET("/roles/:id", middleware.ValidationMiddleware(templateRouter), middleware.AuthAdminMiddleware(), hdGetRoleByID)
+	router.DELETE("/roles/:id", middleware.ValidationMiddleware(templateRouter), middleware.AuthAdminMiddleware(), hdDeleteRoleByID)
 }

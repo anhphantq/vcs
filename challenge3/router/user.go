@@ -10,7 +10,6 @@ import (
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
-	"github.com/go-playground/validator/v10"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -28,14 +27,7 @@ func signUp(c *gin.Context) {
 	err := c.ShouldBind(&user)
 
 	if err != nil {
-		c.AbortWithStatusJSON(http.StatusBadRequest, err)
-		return
-	}
-
-	validate := validator.New()
-
-	if err = validate.Struct(user); err != nil {
-		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "validation error"})
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"messsage": "Something went wrong in the server"})
 		return
 	}
 
@@ -43,23 +35,25 @@ func signUp(c *gin.Context) {
 	connection.Where("email = ?", user.Email).Find(&dbUser)
 
 	if dbUser.Email != "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "This email has been used!"})
+		c.JSON(http.StatusBadRequest, gin.H{"message": "This email has been used!"})
 		return
 	}
 
 	user.Password, err = generatePassword(user.Password)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Internal Error"})
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Can not generate password"})
 		return
 	}
 
 	result := connection.Exec("INSERT INTO ACCOUNTS VALUES(DEFAULT,?,?,?,?)", user.Username, user.Email, user.Role_id, user.Password)
 	if result.Error != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server or your role is not in the DB"})
 		return
 	}
 
-	c.String(http.StatusAccepted, "account created")
+	connection.Where("email = ?", user.Email).Find(&user)
+
+	c.JSON(http.StatusAccepted, gin.H{"user_id": user.User_id, "email": user.Email, "username": user.Username, "role_id": user.Role_id})
 }
 
 func checkPasswordHash(password, hash string) bool {
@@ -93,20 +87,20 @@ func signIn(c *gin.Context) {
 
 	err := c.ShouldBind(&authDetails)
 	if err != nil {
-		c.AbortWithError(http.StatusBadRequest, err)
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"messsage": "Something went wrong in the server"})
 		return
 	}
 
 	var user db.Account
 	connection.Where("email = ?", authDetails.Email).Find(&user)
 	if user.Email == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"msg": "Incorrect Password or Email"})
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Incorrect Password or Email"})
 		return
 	}
 
 	check := checkPasswordHash(authDetails.Password, user.Password)
 	if !check {
-		c.JSON(http.StatusForbidden, gin.H{"msg": "Incorrect Password or Email"})
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Incorrect Password or Email"})
 		return
 	}
 
@@ -115,7 +109,7 @@ func signIn(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"msg": "Can not generate JWT"})
 	}
 
-	c.JSON(http.StatusAccepted, gin.H{"msg": "authenticated", "jwt": validToken})
+	c.JSON(http.StatusAccepted, gin.H{"jwt": validToken})
 }
 
 func hdGetUser(c *gin.Context) {
@@ -135,11 +129,11 @@ func hdDeleteUser(c *gin.Context) {
 	result := connection.Exec("delete from accounts where user_id = ?", user.User_id)
 
 	if result.Error != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"msg": "something went wrong when deleting account"})
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong when deleting account"})
 		return
 	}
 
-	c.JSON(http.StatusAccepted, gin.H{"msg": "account deleted"})
+	c.JSON(http.StatusAccepted, gin.H{"message": "Account deleted"})
 }
 
 func hdPutUser(c *gin.Context) {
@@ -148,8 +142,10 @@ func hdPutUser(c *gin.Context) {
 
 	var account db.Account
 
-	if err := c.ShouldBind(&account); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	err := c.ShouldBind(&account)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
 		return
 	}
 
@@ -161,17 +157,10 @@ func hdPutUser(c *gin.Context) {
 		user.Username = account.Username
 	}
 
-	validate := validator.New()
-	err := validate.Struct(user)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "validation error"})
-		return
-	}
-
 	if account.Password != "" {
 		user.Password, err = generatePassword(user.Password)
 		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
 			return
 		}
 	}
@@ -182,11 +171,11 @@ func hdPutUser(c *gin.Context) {
 	result := connection.Exec("update accounts SET username=?, email=?, password=? where user_id=?", user.Username, user.Email, user.Password, user.User_id)
 
 	if result.Error != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
 		return
 	}
 
-	c.JSON(http.StatusAccepted, gin.H{"msg": "account updated"})
+	c.JSON(http.StatusAccepted, gin.H{"message": "Account updated"})
 }
 
 func hdGetUsers(c *gin.Context) {
@@ -202,11 +191,35 @@ func hdGetUsers(c *gin.Context) {
 		return
 	}
 
+	var usersInfo []gin.H
+
 	for i := range accounts {
-		accounts[i].Password = ""
+		usersInfo = append(usersInfo, gin.H{"user_id": accounts[i].User_id, "username": accounts[i].Username, "email": accounts[i].Email, "role_id": accounts[i].Role_id})
 	}
 
-	c.JSON(http.StatusAccepted, accounts)
+	c.JSON(http.StatusAccepted, usersInfo)
+}
+
+func hdGetUsersByID(c *gin.Context){
+	connection := db.GetDatabase()
+	defer db.Closedatabase(connection)
+
+	id, err := strconv.Atoi(c.Param("id"))
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
+		return
+	}
+
+	var user db.Account
+	connection.Where("user_id = ?", id).Find(&user)
+
+	if user == (db.Account{}) {
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Wrong user's ID"})
+		return
+	}
+
+	c.JSON(http.StatusAccepted, gin.H{"user_id": user.User_id, "username": user.Username, "email": user.Email, "role_id": user.Role_id})
 }
 
 func hdDeleteUserById(c *gin.Context) {
@@ -215,71 +228,87 @@ func hdDeleteUserById(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
 		return
 	}
 
 	result := connection.Exec("delete from accounts where user_id=?", id)
 
 	if result.Error != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
 		return
 	}
 
-	c.String(http.StatusAccepted, "User deleted")
+	if result.RowsAffected < 1 {
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Wrong user's ID"})
+		return
+	}
+
+	c.JSON(http.StatusAccepted, gin.H{"message": "Account deleted"})
 }
 
 func hdPutUserById(c *gin.Context) {
 	connection := db.GetDatabase()
 	defer db.Closedatabase(connection)
-	var account db.Account
 
 	id, err := strconv.Atoi(c.Param("id"))
 
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
 		return
 	}
+	
+	var user db.Account
+	connection.Where("user_id = ?", id).Find(&user)
+	
+	var account db.Account
 
 	if err := c.ShouldBind(&account); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
 		return
 	}
 
-	validate := validator.New()
-	err = validate.Struct(account)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "validation error"})
-		return
+	if account.Password != "" {
+		user.Password = account.Password
 	}
 
-	account.Password, err = generatePassword(account.Password)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
+	if account.Username != "" {
+		user.Username = account.Username
 	}
 
-	result := connection.Exec("update accounts SET username=?, role_id=?, password=? where user_id=?", account.Username, account.Role_id, account.Password, id)
+	if account.Password != "" {
+		user.Password, err = generatePassword(user.Password)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
+			return
+		}
+	}
+
+	result := connection.Exec("update accounts SET username=?, password=? where user_id=?", user.Username, user.Password, id)
 
 	if result.Error != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
 		return
 	}
 
-	c.String(http.StatusAccepted, "Info updated")
+	if result.RowsAffected < 1 {
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Wrong user's ID"})
+		return
+	}
+
+	c.JSON(http.StatusAccepted, gin.H{"message": "Info updated"})
 }
 
 func initUserRouter(router *gin.RouterGroup) {
-	
+	router.POST("/signup", middleware.ValidationMiddleware(templateRouter), signUp)
+	router.POST("/signin", middleware.ValidationMiddleware(templateRouter), signIn)
 
-	router.POST("/signup", signUp)
-	router.POST("/signin", signIn)
+	router.GET("/user", middleware.ValidationMiddleware(templateRouter),middleware.AuthMiddleware(), middleware.PermitMiddleware("get", "self"), hdGetUser)
+	router.DELETE("/user", middleware.ValidationMiddleware(templateRouter),middleware.AuthMiddleware(), middleware.PermitMiddleware("delete", "self"), hdDeleteUser)
+	router.PUT("/user", middleware.ValidationMiddleware(templateRouter),middleware.AuthMiddleware(), middleware.PermitMiddleware("put", "self"), hdPutUser)
 
-	router.GET("", middleware.AuthMiddleware(), middleware.PermitMiddleware("get", "self"), hdGetUser)
-	router.DELETE("", middleware.AuthMiddleware(), middleware.PermitMiddleware("delete", "self"), hdDeleteUser)
-	router.PUT("", middleware.AuthMiddleware(), middleware.PermitMiddleware("put", "self"), hdPutUser)
-
-	router.GET("/all", middleware.AuthMiddleware(), middleware.PermitMiddleware("get", "all"), hdGetUsers)
-	router.DELETE("/all/:id", middleware.AuthMiddleware(), middleware.PermitMiddleware("delete", "all"), hdDeleteUserById)
-	router.PUT("/all/:id", middleware.AuthMiddleware(), middleware.PermitMiddleware("put", "all"), hdPutUserById)
+	router.GET("/users", middleware.ValidationMiddleware(templateRouter),middleware.AuthMiddleware(), middleware.PermitMiddleware("get", "all"), hdGetUsers)
+	router.GET("/users/:id", middleware.ValidationMiddleware(templateRouter),middleware.AuthMiddleware(), middleware.PermitMiddleware("get", "all"), hdGetUsersByID)
+	router.DELETE("/users/:id", middleware.ValidationMiddleware(templateRouter),middleware.AuthMiddleware(), middleware.PermitMiddleware("delete", "all"), hdDeleteUserById)
+	router.PUT("/users/:id", middleware.ValidationMiddleware(templateRouter),middleware.AuthMiddleware(), middleware.PermitMiddleware("put", "all"), hdPutUserById)
 }
