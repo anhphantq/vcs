@@ -5,7 +5,7 @@ info:
   description: VCS CHALLENGE
   version: 0.0.1
 servers:
-  - url: /
+- url: /
 paths:
   /user-management/signup:
     post:
@@ -14,7 +14,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/usermanagement_signup_body"
+              $ref: '#/components/schemas/usermanagement_signup_body'
         required: true
       responses:
         "200":
@@ -22,19 +22,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/inline_response_200"
+                $ref: '#/components/schemas/inline_response_200'
         "400":
           description: Invalid syntax
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
   /user-management/signin:
     post:
       description: User login with email and password,
@@ -42,7 +42,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/usermanagement_signin_body"
+              $ref: '#/components/schemas/usermanagement_signin_body'
         required: true
       responses:
         "200":
@@ -50,19 +50,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/inline_response_200_1"
+                $ref: '#/components/schemas/inline_response_200_1'
         "400":
           description: Invalid syntax
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
   /user-management/user:
     get:
       description: Get user information
@@ -72,28 +72,28 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User"
+                $ref: '#/components/schemas/User'
         "401":
           description: Access token is missing or invalid
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
       security:
-        - bearerAuth: []
+      - bearerAuth: []
     put:
       description: Update user's name/password
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/usermanagement_user_body"
+              $ref: '#/components/schemas/usermanagement_user_body'
         required: true
       responses:
         "200":
@@ -101,27 +101,27 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "400":
           description: Invalid syntax
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "401":
           description: Access token is missing or invalid
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
       security:
-        - bearerAuth: []
+      - bearerAuth: []
     delete:
       description: Delete user
       responses:
@@ -130,21 +130,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "401":
           description: Access token is missing or invalid
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
       security:
-        - bearerAuth: []
+      - bearerAuth: []
   /user-management/users:
     get:
       description: Get all users
@@ -156,76 +156,76 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/User"
+                  $ref: '#/components/schemas/User'
         "401":
           description: Access token is missing or invalid
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
       security:
-        - bearerAuth: []
+      - bearerAuth: []
   /user-management/users/{id}:
     get:
       description: Get user by user id
       parameters:
-        - name: id
-          in: path
-          description: ID of the user to perform operation
-          required: true
-          style: simple
-          explode: false
-          schema:
-            type: number
+      - name: id
+        in: path
+        description: ID of the user to perform operation
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
       responses:
         "200":
           description: Request accepted
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User"
+                $ref: '#/components/schemas/User'
         "400":
           description: Invalid syntax
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "401":
           description: Access token is missing or invalid
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
       security:
-        - bearerAuth: []
+      - bearerAuth: []
     put:
       description: Update user by user id
       parameters:
-        - name: id
-          in: path
-          description: ID of the user to perform operation
-          required: true
-          style: simple
-          explode: false
-          schema:
-            type: number
+      - name: id
+        in: path
+        description: ID of the user to perform operation
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/users_id_body"
+              $ref: '#/components/schemas/users_id_body'
         required: true
       responses:
         "200":
@@ -233,65 +233,65 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "400":
           description: Invalid syntax
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "401":
           description: Access token is missing or invalid
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
       security:
-        - bearerAuth: []
+      - bearerAuth: []
     delete:
       description: Delete user by user id
       parameters:
-        - name: id
-          in: path
-          description: ID of the user to perform operation
-          required: true
-          style: simple
-          explode: false
-          schema:
-            type: number
+      - name: id
+        in: path
+        description: ID of the user to perform operation
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
       responses:
         "200":
           description: Request accepted
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "400":
           description: Invalid syntax
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "401":
           description: Access token is missing or invalid
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
       security:
-        - bearerAuth: []
+      - bearerAuth: []
   /role-management/roles:
     get:
       description: Get all roles in database
@@ -303,28 +303,28 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Role"
+                  $ref: '#/components/schemas/Role'
         "401":
           description: Access token is missing or invalid
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
       security:
-        - bearerAuth: []
+      - bearerAuth: []
     post:
       description: Create a new role
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/rolemanagement_roles_body"
+              $ref: '#/components/schemas/rolemanagement_roles_body'
         required: true
       responses:
         "200":
@@ -332,104 +332,104 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/inline_response_200_2"
+                $ref: '#/components/schemas/inline_response_200_2'
         "400":
           description: Invalid syntax
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "401":
           description: Access token is missing or invalid
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
       security:
-        - bearerAuth: []
+      - bearerAuth: []
   /role-management/roles/{id}:
     get:
       description: Get role by ID
       parameters:
-        - name: id
-          in: path
-          description: ID of the role to perform operation
-          required: true
-          style: simple
-          explode: false
-          schema:
-            type: number
+      - name: id
+        in: path
+        description: ID of the role to perform operation
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
       responses:
         "200":
           description: Request accepted
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Role"
+                $ref: '#/components/schemas/Role'
         "400":
           description: Invalid syntax
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "401":
           description: Access token is missing or invalid
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
       security:
-        - bearerAuth: []
+      - bearerAuth: []
     delete:
       description: Delete role by ID
       parameters:
-        - name: id
-          in: path
-          description: ID of the role to perform operation
-          required: true
-          style: simple
-          explode: false
-          schema:
-            type: number
+      - name: id
+        in: path
+        description: ID of the role to perform operation
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
       responses:
         "200":
           description: Request accepted
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "400":
           description: Invalid syntax
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "401":
           description: Access token is missing or invalid
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
       security:
-        - bearerAuth: []
+      - bearerAuth: []
   /permission-management/permissions:
     get:
       description: Get all permissions in database
@@ -441,28 +441,28 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Permission"
+                  $ref: '#/components/schemas/Permission'
         "401":
           description: Access token is missing or invalid
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
       security:
-        - bearerAuth: []
+      - bearerAuth: []
     post:
       description: Create a new permission
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/permissionmanagement_permissions_body"
+              $ref: '#/components/schemas/permissionmanagement_permissions_body'
         required: true
       responses:
         "200":
@@ -470,104 +470,104 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/inline_response_200_3"
+                $ref: '#/components/schemas/inline_response_200_3'
         "400":
           description: Invalid syntax
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "401":
           description: Access token is missing or invalid
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
       security:
-        - bearerAuth: []
+      - bearerAuth: []
   /permission-management/permissions/{id}:
     get:
       description: Get permission by ID
       parameters:
-        - name: id
-          in: path
-          description: ID of the permission to perform operation
-          required: true
-          style: simple
-          explode: false
-          schema:
-            type: number
+      - name: id
+        in: path
+        description: ID of the permission to perform operation
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
       responses:
         "200":
           description: Request accepted
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Permission"
+                $ref: '#/components/schemas/Permission'
         "400":
           description: Invalid syntax
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "401":
           description: Access token is missing or invalid
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
       security:
-        - bearerAuth: []
+      - bearerAuth: []
     delete:
       description: Delete permission by ID
       parameters:
-        - name: id
-          in: path
-          description: ID of the permission to perform operation
-          required: true
-          style: simple
-          explode: false
-          schema:
-            type: number
+      - name: id
+        in: path
+        description: ID of the permission to perform operation
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
       responses:
         "200":
           description: Request accepted
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "400":
           description: Invalid syntax
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "401":
           description: Access token is missing or invalid
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
       security:
-        - bearerAuth: []
+      - bearerAuth: []
   /granting-management/granting:
     get:
       description: Get all the granted permission
@@ -579,28 +579,28 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Granting"
+                  $ref: '#/components/schemas/Granting'
         "401":
           description: Access token is missing or invalid
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
       security:
-        - bearerAuth: []
+      - bearerAuth: []
     post:
       description: Granting permission to a role
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Granting"
+              $ref: '#/components/schemas/Granting'
         required: true
       responses:
         "200":
@@ -608,76 +608,427 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "400":
           description: Invalid syntax
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "401":
           description: Access token is missing or invalid
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
       security:
-        - bearerAuth: []
+      - bearerAuth: []
     delete:
       description: Delete a granted permission of a role
       parameters:
-        - name: role_id
-          in: query
-          required: true
-          style: form
-          explode: true
-          schema:
-            type: number
-        - name: permission_id
-          in: query
-          required: true
-          style: form
-          explode: true
-          schema:
-            type: number
+      - name: role_id
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: number
+      - name: permission_id
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: number
       responses:
         "200":
           description: Request accepted
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "400":
           description: Invalid syntax
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "401":
           description: Access token is missing or invalid
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
         "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Message"
+                $ref: '#/components/schemas/Message'
       security:
-        - bearerAuth: []
+      - bearerAuth: []
+  /post-management/post:
+    get:
+      description: Get user's posts
+      parameters:
+      - name: page
+        in: query
+        description: The page of the posts' list
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: number
+      responses:
+        "200":
+          description: Request accepted
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+        "301":
+          description: Redirect when number of posts greater than 10
+        "401":
+          description: Access token is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+      security:
+      - bearerAuth: []
+    post:
+      description: Create a new post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postmanagement_post_body'
+        required: true
+      responses:
+        "200":
+          description: Request accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        "400":
+          description: Invalid syntax
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        "401":
+          description: Access token is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+      security:
+      - bearerAuth: []
+  /post-management/post/{id}:
+    get:
+      description: Get user's posts by ID
+      parameters:
+      - name: id
+        in: path
+        description: ID of the permission to perform operation
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+      responses:
+        "200":
+          description: Request accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        "401":
+          description: Access token is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+      security:
+      - bearerAuth: []
+    put:
+      description: Update user's post by ID
+      parameters:
+      - name: id
+        in: path
+        description: ID of the permission to perform operation
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/post_id_body'
+        required: true
+      responses:
+        "200":
+          description: Request accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        "400":
+          description: Invalid syntax
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        "401":
+          description: Access token is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+      security:
+      - bearerAuth: []
+    delete:
+      description: Delete user's post by ID
+      parameters:
+      - name: id
+        in: path
+        description: ID of the permission to perform operation
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+      responses:
+        "200":
+          description: Request accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        "400":
+          description: Invalid syntax
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        "401":
+          description: Access token is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+      security:
+      - bearerAuth: []
+  /post-management/posts:
+    get:
+      description: Get all user's posts
+      parameters:
+      - name: page
+        in: query
+        description: The page of the posts' list
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: number
+      responses:
+        "200":
+          description: Request accepted
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+        "301":
+          description: Redirect when number of posts greater than 10
+        "401":
+          description: Access token is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+      security:
+      - bearerAuth: []
+  /post-management/posts/{id}:
+    get:
+      description: Get user's posts by user ID
+      parameters:
+      - name: id
+        in: path
+        description: ID of the permission to perform operation
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+      - name: page
+        in: query
+        description: The page of the posts' list
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: number
+      responses:
+        "200":
+          description: Request accepted
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+        "301":
+          description: Redirect when number of posts greater than 10
+        "401":
+          description: Access token is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+      security:
+      - bearerAuth: []
+    put:
+      description: Update user's post by ID
+      parameters:
+      - name: id
+        in: path
+        description: ID of the permission to perform operation
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/posts_id_body'
+        required: true
+      responses:
+        "200":
+          description: Request accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        "400":
+          description: Invalid syntax
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        "401":
+          description: Access token is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+      security:
+      - bearerAuth: []
+    delete:
+      description: Delete user's post by ID
+      parameters:
+      - name: id
+        in: path
+        description: ID of the permission to perform operation
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+      responses:
+        "200":
+          description: Request accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        "400":
+          description: Invalid syntax
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        "401":
+          description: Access token is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+      security:
+      - bearerAuth: []
 components:
   schemas:
     Message:
       required:
-        - message
+      - message
       type: object
       properties:
         message:
@@ -685,9 +1036,9 @@ components:
       description: Error notification
     User:
       required:
-        - email
-        - role_id
-        - username
+      - email
+      - role_id
+      - username
       type: object
       properties:
         username:
@@ -702,8 +1053,8 @@ components:
       description: User information
     Role:
       required:
-        - name
-        - role_id
+      - name
+      - role_id
       type: object
       properties:
         role_id:
@@ -714,9 +1065,9 @@ components:
       description: Role information
     Permission:
       required:
-        - name
-        - permission_id
-        - scope
+      - name
+      - permission_id
+      - scope
       type: object
       properties:
         permission_id:
@@ -730,8 +1081,8 @@ components:
       description: Permission information
     Granting:
       required:
-        - permission_id
-        - role_id
+      - permission_id
+      - role_id
       type: object
       properties:
         role_id:
@@ -739,12 +1090,33 @@ components:
         permission_id:
           type: number
       description: Granting information
+    Post:
+      required:
+      - content
+      - created_at
+      - post_id
+      - updated_at
+      - user_id
+      type: object
+      properties:
+        post_id:
+          type: number
+        content:
+          minLength: 1
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        user_id:
+          type: number
+      description: Post information
     usermanagement_signup_body:
       required:
-        - email
-        - password
-        - role_id
-        - username
+      - email
+      - password
+      - role_id
+      - username
       type: object
       properties:
         password:
@@ -761,17 +1133,17 @@ components:
           type: number
     inline_response_200:
       allOf:
-        - $ref: "#/components/schemas/User"
-        - required:
-            - user_id
-          type: object
-          properties:
-            user_id:
-              type: number
+      - $ref: '#/components/schemas/User'
+      - required:
+        - user_id
+        type: object
+        properties:
+          user_id:
+            type: number
     usermanagement_signin_body:
       required:
-        - email
-        - password
+      - email
+      - password
       type: object
       properties:
         email:
@@ -782,48 +1154,48 @@ components:
           type: string
     inline_response_200_1:
       required:
-        - jwt
+      - jwt
       type: object
       properties:
         jwt:
           type: string
     usermanagement_user_body:
       oneOf:
-        - required:
-            - password
-          type: object
-          properties:
-            password:
-              minLength: 8
-              type: string
-        - required:
-            - username
-          type: object
-          properties:
-            username:
-              minLength: 1
-              pattern: ^([A-Z][a-z]{0,10}\s){1,5}[A-Z][a-z]{0,10}$
-              type: string
+      - required:
+        - password
+        type: object
+        properties:
+          password:
+            minLength: 8
+            type: string
+      - required:
+        - username
+        type: object
+        properties:
+          username:
+            minLength: 1
+            pattern: ^([A-Z][a-z]{0,10}\s){1,5}[A-Z][a-z]{0,10}$
+            type: string
     users_id_body:
       oneOf:
-        - required:
-            - password
-          type: object
-          properties:
-            password:
-              minLength: 8
-              type: string
-        - required:
-            - username
-          type: object
-          properties:
-            username:
-              minLength: 1
-              pattern: ^([A-Z][a-z]{0,10}\s){1,5}[A-Z][a-z]{0,10}$
-              type: string
+      - required:
+        - password
+        type: object
+        properties:
+          password:
+            minLength: 8
+            type: string
+      - required:
+        - username
+        type: object
+        properties:
+          username:
+            minLength: 1
+            pattern: ^([A-Z][a-z]{0,10}\s){1,5}[A-Z][a-z]{0,10}$
+            type: string
     rolemanagement_roles_body:
       required:
-        - name
+      - name
       type: object
       properties:
         name:
@@ -831,15 +1203,15 @@ components:
           type: string
     inline_response_200_2:
       required:
-        - role_id
+      - role_id
       type: object
       properties:
         role_id:
           type: string
     permissionmanagement_permissions_body:
       required:
-        - name
-        - scope
+      - name
+      - scope
       type: object
       properties:
         name:
@@ -850,36 +1222,62 @@ components:
           type: string
     inline_response_200_3:
       required:
-        - permission_id
+      - permission_id
       type: object
       properties:
         permission_id:
           type: number
+    postmanagement_post_body:
+      required:
+      - content
+      type: object
+      properties:
+        content:
+          minLength: 1
+          type: string
+    post_id_body:
+      required:
+      - content
+      type: object
+      properties:
+        content:
+          minLength: 1
+          type: string
+    posts_id_body:
+      required:
+      - content
+      type: object
+      properties:
+        content:
+          minLength: 1
+          type: string
   responses:
     SuccessRequest:
       description: Request accepted
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Message"
+            $ref: '#/components/schemas/Message'
     BadRequestError:
       description: Invalid syntax
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Message"
+            $ref: '#/components/schemas/Message'
     UnauthorizedError:
       description: Access token is missing or invalid
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Message"
+            $ref: '#/components/schemas/Message'
     InternalError:
       description: Internal Error
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Message"
+            $ref: '#/components/schemas/Message'
+    PostRedirect:
+      description: Redirect when number of posts greater than 10
   securitySchemes:
     bearerAuth:
       type: http

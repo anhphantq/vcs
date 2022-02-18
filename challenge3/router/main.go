@@ -34,4 +34,7 @@ func InitRouter(router *gin.Engine) {
 
 	permissionRouter := router.Group("/permission-management")
 	initPermissionRouter(permissionRouter)
+
+	postRouter := router.Group("/post-management")
+	InitPostRouter(postRouter)
 }

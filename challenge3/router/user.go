@@ -187,7 +187,7 @@ func hdGetUsers(c *gin.Context) {
 	result := connection.Raw("select * from accounts").Scan(&accounts)
 
 	if result.Error != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": result.Error.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Something went wrong in the server"})
 		return
 	}
 

@@ -28,3 +28,11 @@ type Authentication struct {
 	Email    string `json:"email" binding:"required"`
 	Password string `json:"password" binding:"required"`
 }
+
+type Post struct{
+	Post_id uint `json:"post_id"`
+	Content string `json:"content"`
+	Created_at string `json:"created_at"`
+	Updated_at string `json:"updated_at"`
+	User_id uint `json:"user_id"`
+}
