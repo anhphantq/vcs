@@ -1,0 +1,353 @@
+{
+	"info": {
+		"_postman_id": "8608ec32-df27-4af6-bb90-03dafc550125",
+		"name": "CHALLENGE2 API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "SINGUP",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/user-management/user/signup",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user-management",
+						"user",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SINGIN",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/user-management/user/signin",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user-management",
+						"user",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET USER INFO",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/user-management/user/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user-management",
+						"user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE USER",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/user-management/user",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user-management",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE USER INFO",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/user-management/user",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user-management",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET ALL USER INFO",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/user-management/user/all",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user-management",
+						"user",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE USER BY ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/user-management/user/all/:id",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user-management",
+						"user",
+						"all",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE USER BY ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/user-management/user/all/:id",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user-management",
+						"user",
+						"all",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET ALL ROLES",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/user-management/role",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user-management",
+						"role"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE NEW ROLE",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/user-management/role",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user-management",
+						"role"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE ROLE BY ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/role_management/role/:id",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"role_management",
+						"role",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET ALL PERMISSIONS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/user-management/permission",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user-management",
+						"permission"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE NEW PERMISSION",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/user-management/permission",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user-management",
+						"permission"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE PERMISSION BY ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/user-management/permission/:id",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user-management",
+						"permission",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET ALL GRANTING",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/user-management/grant",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user-management",
+						"grant"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GRANT",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/user-management/grant",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user-management",
+						"grant"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELTETE GRANT",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/user-management/grant",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user-management",
+						"grant"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
