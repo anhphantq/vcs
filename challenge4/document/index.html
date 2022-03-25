@@ -1,0 +1,2060 @@
+<!doctype html>
+<html>
+  <head>
+    <title>CHALLENGE3 API</title>
+    <style type="text/css">
+      body {
+      	font-family: Trebuchet MS, sans-serif;
+      	font-size: 15px;
+      	color: #444;
+      	margin-right: 24px;
+      }
+      
+      h1	{
+      	font-size: 25px;
+      }
+      h2	{
+      	font-size: 20px;
+      }
+      h3	{
+      	font-size: 16px;
+      	font-weight: bold;
+      }
+      hr	{
+      	height: 1px;
+      	border: 0;
+      	color: #ddd;
+      	background-color: #ddd;
+      }
+      
+      .app-desc {
+        clear: both;
+        margin-left: 20px;
+      }
+      .param-name {
+        width: 100%;
+      }
+      .license-info {
+        margin-left: 20px;
+      }
+      
+      .license-url {
+        margin-left: 20px;
+      }
+      
+      .model {
+        margin: 0 0 0px 20px;
+      }
+      
+      .method {
+        margin-left: 20px;
+      }
+      
+      .method-notes	{
+      	margin: 10px 0 20px 0;
+      	font-size: 90%;
+      	color: #555;
+      }
+      
+      pre {
+        padding: 10px;
+        margin-bottom: 2px;
+      }
+      
+      .http-method {
+       text-transform: uppercase;
+      }
+      
+      pre.get {
+        background-color: #0f6ab4;
+      }
+      
+      pre.post {
+        background-color: #10a54a;
+      }
+      
+      pre.put {
+        background-color: #c5862b;
+      }
+      
+      pre.delete {
+        background-color: #a41e22;
+      }
+      
+      .huge	{
+      	color: #fff;
+      }
+      
+      pre.example {
+        background-color: #f3f3f3;
+        padding: 10px;
+        border: 1px solid #ddd;
+      }
+      
+      code {
+        white-space: pre;
+      }
+      
+      .nickname {
+        font-weight: bold;
+      }
+      
+      .method-path {
+        font-size: 1.5em;
+        background-color: #0f6ab4;
+      }
+      
+      .up {
+        float:right;
+      }
+      
+      .parameter {
+        width: 500px;
+      }
+      
+      .param {
+        width: 500px;
+        padding: 10px 0 0 20px;
+        font-weight: bold;
+      }
+      
+      .param-desc {
+        width: 700px;
+        padding: 0 0 0 20px;
+        color: #777;
+      }
+      
+      .param-type {
+        font-style: italic;
+      }
+      
+      .param-enum-header {
+      width: 700px;
+      padding: 0 0 0 60px;
+      color: #777;
+      font-weight: bold;
+      }
+      
+      .param-enum {
+      width: 700px;
+      padding: 0 0 0 80px;
+      color: #777;
+      font-style: italic;
+      }
+      
+      .field-label {
+        padding: 0;
+        margin: 0;
+        clear: both;
+      }
+      
+      .field-items	{
+      	padding: 0 0 15px 0;
+      	margin-bottom: 15px;
+      }
+      
+      .return-type {
+        clear: both;
+        padding-bottom: 10px;
+      }
+      
+      .param-header {
+        font-weight: bold;
+      }
+      
+      .method-tags {
+        text-align: right;
+      }
+      
+      .method-tag {
+        background: none repeat scroll 0% 0% #24A600;
+        border-radius: 3px;
+        padding: 2px 10px;
+        margin: 2px;
+        color: #FFF;
+        display: inline-block;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+  <h1>CHALLENGE3 API</h1>
+    <div class="app-desc">VCS CHALLENGE</div>
+    <div class="app-desc">More information: <a href="https://helloreverb.com">https://helloreverb.com</a></div>
+    <div class="app-desc">Contact Info: <a href="hello@helloreverb.com">hello@helloreverb.com</a></div>
+    <div class="app-desc">Version: 0.0.1</div>
+    
+    <div class="license-info">All rights reserved</div>
+    <div class="license-url">http://apache.org/licenses/LICENSE-2.0.html</div>
+  <h2>Access</h2>
+    <ol>
+      <li></li>
+    </ol>
+
+  <h2><a name="__Methods">Methods</a></h2>
+  [ Jump to <a href="#__Models">Models</a> ]
+
+  <h3>Table of Contents </h3>
+  <div class="method-summary"></div>
+  <h4><a href="#Default">Default</a></h4>
+  <ul>
+  <li><a href="#grantingManagementGrantingDelete"><code><span class="http-method">delete</span> /granting-management/granting</code></a></li>
+  <li><a href="#grantingManagementGrantingGet"><code><span class="http-method">get</span> /granting-management/granting</code></a></li>
+  <li><a href="#grantingManagementGrantingPost"><code><span class="http-method">post</span> /granting-management/granting</code></a></li>
+  <li><a href="#permissionManagementPermissionsGet"><code><span class="http-method">get</span> /permission-management/permissions</code></a></li>
+  <li><a href="#permissionManagementPermissionsIdDelete"><code><span class="http-method">delete</span> /permission-management/permissions/{id}</code></a></li>
+  <li><a href="#permissionManagementPermissionsIdGet"><code><span class="http-method">get</span> /permission-management/permissions/{id}</code></a></li>
+  <li><a href="#permissionManagementPermissionsPost"><code><span class="http-method">post</span> /permission-management/permissions</code></a></li>
+  <li><a href="#postManagementPostGet"><code><span class="http-method">get</span> /post-management/post</code></a></li>
+  <li><a href="#postManagementPostIdDelete"><code><span class="http-method">delete</span> /post-management/post/{id}</code></a></li>
+  <li><a href="#postManagementPostIdGet"><code><span class="http-method">get</span> /post-management/post/{id}</code></a></li>
+  <li><a href="#postManagementPostIdPut"><code><span class="http-method">put</span> /post-management/post/{id}</code></a></li>
+  <li><a href="#postManagementPostPost"><code><span class="http-method">post</span> /post-management/post</code></a></li>
+  <li><a href="#postManagementPostsGet"><code><span class="http-method">get</span> /post-management/posts</code></a></li>
+  <li><a href="#postManagementPostsIdDelete"><code><span class="http-method">delete</span> /post-management/posts/{id}</code></a></li>
+  <li><a href="#postManagementPostsIdGet"><code><span class="http-method">get</span> /post-management/posts/{id}</code></a></li>
+  <li><a href="#postManagementPostsIdPut"><code><span class="http-method">put</span> /post-management/posts/{id}</code></a></li>
+  <li><a href="#roleManagementRolesGet"><code><span class="http-method">get</span> /role-management/roles</code></a></li>
+  <li><a href="#roleManagementRolesIdDelete"><code><span class="http-method">delete</span> /role-management/roles/{id}</code></a></li>
+  <li><a href="#roleManagementRolesIdGet"><code><span class="http-method">get</span> /role-management/roles/{id}</code></a></li>
+  <li><a href="#roleManagementRolesPost"><code><span class="http-method">post</span> /role-management/roles</code></a></li>
+  <li><a href="#userManagementSigninPost"><code><span class="http-method">post</span> /user-management/signin</code></a></li>
+  <li><a href="#userManagementSignupPost"><code><span class="http-method">post</span> /user-management/signup</code></a></li>
+  <li><a href="#userManagementUserDelete"><code><span class="http-method">delete</span> /user-management/user</code></a></li>
+  <li><a href="#userManagementUserGet"><code><span class="http-method">get</span> /user-management/user</code></a></li>
+  <li><a href="#userManagementUserPut"><code><span class="http-method">put</span> /user-management/user</code></a></li>
+  <li><a href="#userManagementUsersGet"><code><span class="http-method">get</span> /user-management/users</code></a></li>
+  <li><a href="#userManagementUsersIdDelete"><code><span class="http-method">delete</span> /user-management/users/{id}</code></a></li>
+  <li><a href="#userManagementUsersIdGet"><code><span class="http-method">get</span> /user-management/users/{id}</code></a></li>
+  <li><a href="#userManagementUsersIdPut"><code><span class="http-method">put</span> /user-management/users/{id}</code></a></li>
+  </ul>
+
+  <h1><a name="Default">Default</a></h1>
+  <div class="method"><a name="grantingManagementGrantingDelete"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /granting-management/granting</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">grantingManagementGrantingDelete</span>)</div>
+    <div class="method-notes">Delete a granted permission of a role</div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">role_id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">permission_id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Message">Message</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "message" : "message"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Request accepted
+        <a href="#Message">Message</a>
+    <h4 class="field-label">400</h4>
+    Invalid syntax
+        <a href="#Message">Message</a>
+    <h4 class="field-label">401</h4>
+    Access token is missing or invalid
+        <a href="#Message">Message</a>
+    <h4 class="field-label">500</h4>
+    Internal Error
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="grantingManagementGrantingGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /granting-management/granting</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">grantingManagementGrantingGet</span>)</div>
+    <div class="method-notes">Get all the granted permission</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Granting">Granting</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "role_id" : 0.8008281904610115,
+  "permission_id" : 6.027456183070403
+}, {
+  "role_id" : 0.8008281904610115,
+  "permission_id" : 6.027456183070403
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Request accepted
+        
+    <h4 class="field-label">401</h4>
+    Access token is missing or invalid
+        <a href="#Message">Message</a>
+    <h4 class="field-label">500</h4>
+    Internal Error
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="grantingManagementGrantingPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /granting-management/granting</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">grantingManagementGrantingPost</span>)</div>
+    <div class="method-notes">Granting permission to a role</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#Granting">Granting</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Message">Message</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "message" : "message"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Request accepted
+        <a href="#Message">Message</a>
+    <h4 class="field-label">400</h4>
+    Invalid syntax
+        <a href="#Message">Message</a>
+    <h4 class="field-label">401</h4>
+    Access token is missing or invalid
+        <a href="#Message">Message</a>
+    <h4 class="field-label">500</h4>
+    Internal Error
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="permissionManagementPermissionsGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /permission-management/permissions</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">permissionManagementPermissionsGet</span>)</div>
+    <div class="method-notes">Get all permissions in database</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Permission">Permission</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "scope" : "scope",
+  "name" : "name",
+  "permission_id" : 0.8008281904610115
+}, {
+  "scope" : "scope",
+  "name" : "name",
+  "permission_id" : 0.8008281904610115
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Request accepted
+        
+    <h4 class="field-label">401</h4>
+    Access token is missing or invalid
+        <a href="#Message">Message</a>
+    <h4 class="field-label">500</h4>
+    Internal Error
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="permissionManagementPermissionsIdDelete"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /permission-management/permissions/{id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">permissionManagementPermissionsIdDelete</span>)</div>
+    <div class="method-notes">Delete permission by ID</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of the permission to perform operation </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Message">Message</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "message" : "message"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Request accepted
+        <a href="#Message">Message</a>
+    <h4 class="field-label">400</h4>
+    Invalid syntax
+        <a href="#Message">Message</a>
+    <h4 class="field-label">401</h4>
+    Access token is missing or invalid
+        <a href="#Message">Message</a>
+    <h4 class="field-label">500</h4>
+    Internal Error
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="permissionManagementPermissionsIdGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /permission-management/permissions/{id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">permissionManagementPermissionsIdGet</span>)</div>
+    <div class="method-notes">Get permission by ID</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of the permission to perform operation </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Permission">Permission</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "scope" : "scope",
+  "name" : "name",
+  "permission_id" : 0.8008281904610115
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Request accepted
+        <a href="#Permission">Permission</a>
+    <h4 class="field-label">400</h4>
+    Invalid syntax
+        <a href="#Message">Message</a>
+    <h4 class="field-label">401</h4>
+    Access token is missing or invalid
+        <a href="#Message">Message</a>
+    <h4 class="field-label">500</h4>
+    Internal Error
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="permissionManagementPermissionsPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /permission-management/permissions</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">permissionManagementPermissionsPost</span>)</div>
+    <div class="method-notes">Create a new permission</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#permissionmanagement_permissions_body">permissionmanagement_permissions_body</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inline_response_200_3">inline_response_200_3</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "permission_id" : 0.8008281904610115
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Request accepted
+        <a href="#inline_response_200_3">inline_response_200_3</a>
+    <h4 class="field-label">400</h4>
+    Invalid syntax
+        <a href="#Message">Message</a>
+    <h4 class="field-label">401</h4>
+    Access token is missing or invalid
+        <a href="#Message">Message</a>
+    <h4 class="field-label">500</h4>
+    Internal Error
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postManagementPostGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /post-management/post</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postManagementPostGet</span>)</div>
+    <div class="method-notes">Get user's posts</div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">page (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; The page of the posts&#x27; list </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Post">Post</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "post_id" : 0.8008281904610115,
+  "updated_at" : "updated_at",
+  "user_id" : 6.027456183070403,
+  "created_at" : "created_at",
+  "content" : "content"
+}, {
+  "post_id" : 0.8008281904610115,
+  "updated_at" : "updated_at",
+  "user_id" : 6.027456183070403,
+  "created_at" : "created_at",
+  "content" : "content"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Request accepted
+        
+    <h4 class="field-label">301</h4>
+    Redirect when number of posts greater than 10
+        <a href="#"></a>
+    <h4 class="field-label">401</h4>
+    Access token is missing or invalid
+        <a href="#Message">Message</a>
+    <h4 class="field-label">500</h4>
+    Internal Error
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postManagementPostIdDelete"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /post-management/post/{id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postManagementPostIdDelete</span>)</div>
+    <div class="method-notes">Delete user's post by ID</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of the permission to perform operation </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Message">Message</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "message" : "message"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Request accepted
+        <a href="#Message">Message</a>
+    <h4 class="field-label">400</h4>
+    Invalid syntax
+        <a href="#Message">Message</a>
+    <h4 class="field-label">401</h4>
+    Access token is missing or invalid
+        <a href="#Message">Message</a>
+    <h4 class="field-label">500</h4>
+    Internal Error
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postManagementPostIdGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /post-management/post/{id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postManagementPostIdGet</span>)</div>
+    <div class="method-notes">Get user's posts by ID</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of the permission to perform operation </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Post">Post</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "post_id" : 0.8008281904610115,
+  "updated_at" : "updated_at",
+  "user_id" : 6.027456183070403,
+  "created_at" : "created_at",
+  "content" : "content"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Request accepted
+        <a href="#Post">Post</a>
+    <h4 class="field-label">401</h4>
+    Access token is missing or invalid
+        <a href="#Message">Message</a>
+    <h4 class="field-label">500</h4>
+    Internal Error
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postManagementPostIdPut"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /post-management/post/{id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postManagementPostIdPut</span>)</div>
+    <div class="method-notes">Update user's post by ID</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of the permission to perform operation </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#post_id_body">post_id_body</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Message">Message</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "message" : "message"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Request accepted
+        <a href="#Message">Message</a>
+    <h4 class="field-label">400</h4>
+    Invalid syntax
+        <a href="#Message">Message</a>
+    <h4 class="field-label">401</h4>
+    Access token is missing or invalid
+        <a href="#Message">Message</a>
+    <h4 class="field-label">500</h4>
+    Internal Error
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postManagementPostPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /post-management/post</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postManagementPostPost</span>)</div>
+    <div class="method-notes">Create a new post</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#postmanagement_post_body">postmanagement_post_body</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Message">Message</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "message" : "message"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Request accepted
+        <a href="#Message">Message</a>
+    <h4 class="field-label">400</h4>
+    Invalid syntax
+        <a href="#Message">Message</a>
+    <h4 class="field-label">401</h4>
+    Access token is missing or invalid
+        <a href="#Message">Message</a>
+    <h4 class="field-label">500</h4>
+    Internal Error
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postManagementPostsGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /post-management/posts</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postManagementPostsGet</span>)</div>
+    <div class="method-notes">Get all user's posts</div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">page (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; The page of the posts&#x27; list </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Post">Post</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "post_id" : 0.8008281904610115,
+  "updated_at" : "updated_at",
+  "user_id" : 6.027456183070403,
+  "created_at" : "created_at",
+  "content" : "content"
+}, {
+  "post_id" : 0.8008281904610115,
+  "updated_at" : "updated_at",
+  "user_id" : 6.027456183070403,
+  "created_at" : "created_at",
+  "content" : "content"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Request accepted
+        
+    <h4 class="field-label">301</h4>
+    Redirect when number of posts greater than 10
+        <a href="#"></a>
+    <h4 class="field-label">401</h4>
+    Access token is missing or invalid
+        <a href="#Message">Message</a>
+    <h4 class="field-label">500</h4>
+    Internal Error
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postManagementPostsIdDelete"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /post-management/posts/{id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postManagementPostsIdDelete</span>)</div>
+    <div class="method-notes">Delete user's post by ID</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of the permission to perform operation </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Message">Message</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "message" : "message"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Request accepted
+        <a href="#Message">Message</a>
+    <h4 class="field-label">400</h4>
+    Invalid syntax
+        <a href="#Message">Message</a>
+    <h4 class="field-label">401</h4>
+    Access token is missing or invalid
+        <a href="#Message">Message</a>
+    <h4 class="field-label">500</h4>
+    Internal Error
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postManagementPostsIdGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /post-management/posts/{id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postManagementPostsIdGet</span>)</div>
+    <div class="method-notes">Get user's posts by user ID</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of the permission to perform operation </div>    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">page (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; The page of the posts&#x27; list </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Post">Post</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "post_id" : 0.8008281904610115,
+  "updated_at" : "updated_at",
+  "user_id" : 6.027456183070403,
+  "created_at" : "created_at",
+  "content" : "content"
+}, {
+  "post_id" : 0.8008281904610115,
+  "updated_at" : "updated_at",
+  "user_id" : 6.027456183070403,
+  "created_at" : "created_at",
+  "content" : "content"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Request accepted
+        
+    <h4 class="field-label">301</h4>
+    Redirect when number of posts greater than 10
+        <a href="#"></a>
+    <h4 class="field-label">401</h4>
+    Access token is missing or invalid
+        <a href="#Message">Message</a>
+    <h4 class="field-label">500</h4>
+    Internal Error
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postManagementPostsIdPut"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /post-management/posts/{id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postManagementPostsIdPut</span>)</div>
+    <div class="method-notes">Update user's post by ID</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of the permission to perform operation </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#posts_id_body">posts_id_body</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Message">Message</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "message" : "message"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Request accepted
+        <a href="#Message">Message</a>
+    <h4 class="field-label">400</h4>
+    Invalid syntax
+        <a href="#Message">Message</a>
+    <h4 class="field-label">401</h4>
+    Access token is missing or invalid
+        <a href="#Message">Message</a>
+    <h4 class="field-label">500</h4>
+    Internal Error
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="roleManagementRolesGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /role-management/roles</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">roleManagementRolesGet</span>)</div>
+    <div class="method-notes">Get all roles in database</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Role">Role</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "role_id" : 0.8008281904610115,
+  "name" : "name"
+}, {
+  "role_id" : 0.8008281904610115,
+  "name" : "name"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Request accepted
+        
+    <h4 class="field-label">401</h4>
+    Access token is missing or invalid
+        <a href="#Message">Message</a>
+    <h4 class="field-label">500</h4>
+    Internal Error
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="roleManagementRolesIdDelete"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /role-management/roles/{id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">roleManagementRolesIdDelete</span>)</div>
+    <div class="method-notes">Delete role by ID</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of the role to perform operation </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Message">Message</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "message" : "message"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Request accepted
+        <a href="#Message">Message</a>
+    <h4 class="field-label">400</h4>
+    Invalid syntax
+        <a href="#Message">Message</a>
+    <h4 class="field-label">401</h4>
+    Access token is missing or invalid
+        <a href="#Message">Message</a>
+    <h4 class="field-label">500</h4>
+    Internal Error
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="roleManagementRolesIdGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /role-management/roles/{id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">roleManagementRolesIdGet</span>)</div>
+    <div class="method-notes">Get role by ID</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of the role to perform operation </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Role">Role</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "role_id" : 0.8008281904610115,
+  "name" : "name"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Request accepted
+        <a href="#Role">Role</a>
+    <h4 class="field-label">400</h4>
+    Invalid syntax
+        <a href="#Message">Message</a>
+    <h4 class="field-label">401</h4>
+    Access token is missing or invalid
+        <a href="#Message">Message</a>
+    <h4 class="field-label">500</h4>
+    Internal Error
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="roleManagementRolesPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /role-management/roles</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">roleManagementRolesPost</span>)</div>
+    <div class="method-notes">Create a new role</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#rolemanagement_roles_body">rolemanagement_roles_body</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inline_response_200_2">inline_response_200_2</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "role_id" : "role_id"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Request accepted
+        <a href="#inline_response_200_2">inline_response_200_2</a>
+    <h4 class="field-label">400</h4>
+    Invalid syntax
+        <a href="#Message">Message</a>
+    <h4 class="field-label">401</h4>
+    Access token is missing or invalid
+        <a href="#Message">Message</a>
+    <h4 class="field-label">500</h4>
+    Internal Error
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="userManagementSigninPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /user-management/signin</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">userManagementSigninPost</span>)</div>
+    <div class="method-notes">User login with email and password,</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#usermanagement_signin_body">usermanagement_signin_body</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inline_response_200_1">inline_response_200_1</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "jwt" : "jwt"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Successfully logged in
+        <a href="#inline_response_200_1">inline_response_200_1</a>
+    <h4 class="field-label">400</h4>
+    Invalid syntax
+        <a href="#Message">Message</a>
+    <h4 class="field-label">500</h4>
+    Internal Error
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="userManagementSignupPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /user-management/signup</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">userManagementSignupPost</span>)</div>
+    <div class="method-notes">Create a new account</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#usermanagement_signup_body">usermanagement_signup_body</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inline_response_200">inline_response_200</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Account successfully created
+        <a href="#inline_response_200">inline_response_200</a>
+    <h4 class="field-label">400</h4>
+    Invalid syntax
+        <a href="#Message">Message</a>
+    <h4 class="field-label">500</h4>
+    Internal Error
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="userManagementUserDelete"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /user-management/user</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">userManagementUserDelete</span>)</div>
+    <div class="method-notes">Delete user</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Message">Message</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "message" : "message"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Request accepted
+        <a href="#Message">Message</a>
+    <h4 class="field-label">401</h4>
+    Access token is missing or invalid
+        <a href="#Message">Message</a>
+    <h4 class="field-label">500</h4>
+    Internal Error
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="userManagementUserGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /user-management/user</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">userManagementUserGet</span>)</div>
+    <div class="method-notes">Get user information</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#User">User</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "role_id" : 0.8008281904610115,
+  "email" : "email",
+  "username" : "username"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Request succeeded
+        <a href="#User">User</a>
+    <h4 class="field-label">401</h4>
+    Access token is missing or invalid
+        <a href="#Message">Message</a>
+    <h4 class="field-label">500</h4>
+    Internal Error
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="userManagementUserPut"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /user-management/user</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">userManagementUserPut</span>)</div>
+    <div class="method-notes">Update user's name/password</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#usermanagement_user_body">usermanagement_user_body</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Message">Message</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "message" : "message"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Request accepted
+        <a href="#Message">Message</a>
+    <h4 class="field-label">400</h4>
+    Invalid syntax
+        <a href="#Message">Message</a>
+    <h4 class="field-label">401</h4>
+    Access token is missing or invalid
+        <a href="#Message">Message</a>
+    <h4 class="field-label">500</h4>
+    Internal Error
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="userManagementUsersGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /user-management/users</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">userManagementUsersGet</span>)</div>
+    <div class="method-notes">Get all users</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#User">User</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "role_id" : 0.8008281904610115,
+  "email" : "email",
+  "username" : "username"
+}, {
+  "role_id" : 0.8008281904610115,
+  "email" : "email",
+  "username" : "username"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Request accepted
+        
+    <h4 class="field-label">401</h4>
+    Access token is missing or invalid
+        <a href="#Message">Message</a>
+    <h4 class="field-label">500</h4>
+    Internal Error
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="userManagementUsersIdDelete"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /user-management/users/{id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">userManagementUsersIdDelete</span>)</div>
+    <div class="method-notes">Delete user by user id</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of the user to perform operation </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Message">Message</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "message" : "message"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Request accepted
+        <a href="#Message">Message</a>
+    <h4 class="field-label">400</h4>
+    Invalid syntax
+        <a href="#Message">Message</a>
+    <h4 class="field-label">401</h4>
+    Access token is missing or invalid
+        <a href="#Message">Message</a>
+    <h4 class="field-label">500</h4>
+    Internal Error
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="userManagementUsersIdGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /user-management/users/{id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">userManagementUsersIdGet</span>)</div>
+    <div class="method-notes">Get user by user id</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of the user to perform operation </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#User">User</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "role_id" : 0.8008281904610115,
+  "email" : "email",
+  "username" : "username"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Request accepted
+        <a href="#User">User</a>
+    <h4 class="field-label">400</h4>
+    Invalid syntax
+        <a href="#Message">Message</a>
+    <h4 class="field-label">401</h4>
+    Access token is missing or invalid
+        <a href="#Message">Message</a>
+    <h4 class="field-label">500</h4>
+    Internal Error
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="userManagementUsersIdPut"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /user-management/users/{id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">userManagementUsersIdPut</span>)</div>
+    <div class="method-notes">Update user by user id</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of the user to perform operation </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#users_id_body">users_id_body</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Message">Message</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "message" : "message"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Request accepted
+        <a href="#Message">Message</a>
+    <h4 class="field-label">400</h4>
+    Invalid syntax
+        <a href="#Message">Message</a>
+    <h4 class="field-label">401</h4>
+    Access token is missing or invalid
+        <a href="#Message">Message</a>
+    <h4 class="field-label">500</h4>
+    Internal Error
+        <a href="#Message">Message</a>
+  </div> <!-- method -->
+  <hr/>
+
+  <h2><a name="__Models">Models</a></h2>
+  [ Jump to <a href="#__Methods">Methods</a> ]
+
+  <h3>Table of Contents</h3>
+  <ol>
+    <li><a href="#Granting"><code>Granting</code></a></li>
+    <li><a href="#Message"><code>Message</code></a></li>
+    <li><a href="#Permission"><code>Permission</code></a></li>
+    <li><a href="#Post"><code>Post</code></a></li>
+    <li><a href="#Role"><code>Role</code></a></li>
+    <li><a href="#User"><code>User</code></a></li>
+    <li><a href="#inline_response_200"><code>inline_response_200</code></a></li>
+    <li><a href="#inline_response_200_1"><code>inline_response_200_1</code></a></li>
+    <li><a href="#inline_response_200_2"><code>inline_response_200_2</code></a></li>
+    <li><a href="#inline_response_200_3"><code>inline_response_200_3</code></a></li>
+    <li><a href="#permissionmanagement_permissions_body"><code>permissionmanagement_permissions_body</code></a></li>
+    <li><a href="#post_id_body"><code>post_id_body</code></a></li>
+    <li><a href="#postmanagement_post_body"><code>postmanagement_post_body</code></a></li>
+    <li><a href="#posts_id_body"><code>posts_id_body</code></a></li>
+    <li><a href="#rolemanagement_roles_body"><code>rolemanagement_roles_body</code></a></li>
+    <li><a href="#usermanagement_signin_body"><code>usermanagement_signin_body</code></a></li>
+    <li><a href="#usermanagement_signup_body"><code>usermanagement_signup_body</code></a></li>
+    <li><a href="#usermanagement_user_body"><code>usermanagement_user_body</code></a></li>
+    <li><a href="#users_id_body"><code>users_id_body</code></a></li>
+  </ol>
+
+  <div class="model">
+    <h3><a name="Granting"><code>Granting</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Granting information</div>
+    <div class="field-items">
+      <div class="param">role_id </div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+<div class="param">permission_id </div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Message"><code>Message</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Error notification</div>
+    <div class="field-items">
+      <div class="param">message </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Permission"><code>Permission</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Permission information</div>
+    <div class="field-items">
+      <div class="param">permission_id </div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+<div class="param">name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">scope </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Post"><code>Post</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Post information</div>
+    <div class="field-items">
+      <div class="param">post_id </div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+<div class="param">content </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">created_at </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">updated_at </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">user_id </div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Role"><code>Role</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Role information</div>
+    <div class="field-items">
+      <div class="param">role_id </div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+<div class="param">name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="User"><code>User</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>User information</div>
+    <div class="field-items">
+      <div class="param">username </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">email </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">role_id </div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="inline_response_200"><code>inline_response_200</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">username </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">email </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">role_id </div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+<div class="param">user_id </div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="inline_response_200_1"><code>inline_response_200_1</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">jwt </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="inline_response_200_2"><code>inline_response_200_2</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">role_id </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="inline_response_200_3"><code>inline_response_200_3</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">permission_id </div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="permissionmanagement_permissions_body"><code>permissionmanagement_permissions_body</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">scope </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="post_id_body"><code>post_id_body</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">content </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="postmanagement_post_body"><code>postmanagement_post_body</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">content </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="posts_id_body"><code>posts_id_body</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">content </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="rolemanagement_roles_body"><code>rolemanagement_roles_body</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="usermanagement_signin_body"><code>usermanagement_signin_body</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">email </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">password </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="usermanagement_signup_body"><code>usermanagement_signup_body</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">password </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">email </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">username </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">role_id </div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="usermanagement_user_body"><code>usermanagement_user_body</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="users_id_body"><code>users_id_body</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  </body>
+</html>

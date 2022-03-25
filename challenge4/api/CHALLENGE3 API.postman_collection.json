@@ -1,0 +1,5737 @@
+{
+	"info": {
+		"_postman_id": "00ffb6a0-9765-467e-b1bc-7da8112c0a2e",
+		"name": "CHALLENGE3 API",
+		"description": "VCS CHALLENGE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user-management",
+			"item": [
+				{
+					"name": "user",
+					"item": [
+						{
+							"name": "/user-management/user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "<Bearer Token>",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/user-management/user",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user-management",
+										"user"
+									]
+								},
+								"description": "Get user information"
+							},
+							"response": [
+								{
+									"name": "Request succeeded",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/user-management/user",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"user-management",
+												"user"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"email\": \"i@u5cXj.cwJfLo.zbruPWO.t-_vqZ.DOjR.dPSn\",\n  \"role_id\": -35576676.95849789,\n  \"username\": \"Hxm Fw\\fYctcmd᠎M\\tAwshkslrzb\"\n}"
+								},
+								{
+									"name": "Access token is missing or invalid",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/user-management/user",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"user-management",
+												"user"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								},
+								{
+									"name": "Internal Error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/user-management/user",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"user-management",
+												"user"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								}
+							]
+						},
+						{
+							"name": "/user-management/user",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"password\": \"Phananh911\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user-management/user",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user-management",
+										"user"
+									]
+								},
+								"description": "Update user's name/password"
+							},
+							"response": [
+								{
+									"name": "Request accepted",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"password\": \"consectetur consequat incididunt\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/user-management/user",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"user-management",
+												"user"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								},
+								{
+									"name": "Invalid syntax",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"password\": \"consectetur consequat incididunt\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/user-management/user",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"user-management",
+												"user"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								},
+								{
+									"name": "Access token is missing or invalid",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"password\": \"consectetur consequat incididunt\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/user-management/user",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"user-management",
+												"user"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								},
+								{
+									"name": "Internal Error",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"password\": \"consectetur consequat incididunt\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/user-management/user",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"user-management",
+												"user"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								}
+							]
+						},
+						{
+							"name": "/user-management/user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "<Bearer Token>",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/user-management/user",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user-management",
+										"user"
+									]
+								},
+								"description": "Delete user"
+							},
+							"response": [
+								{
+									"name": "Request accepted",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/user-management/user",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"user-management",
+												"user"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								},
+								{
+									"name": "Access token is missing or invalid",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/user-management/user",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"user-management",
+												"user"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								},
+								{
+									"name": "Internal Error",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/user-management/user",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"user-management",
+												"user"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "users",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "/user-management/users/:id",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "<Bearer Token>",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/user-management/users/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"user-management",
+												"users",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "74737786.77843937",
+													"description": "(Required) ID of the user to perform operation"
+												}
+											]
+										},
+										"description": "Get user by user id"
+									},
+									"response": [
+										{
+											"name": "Request accepted",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/user-management/users/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"user-management",
+														"users",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the user to perform operation"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"email\": \"i@u5cXj.cwJfLo.zbruPWO.t-_vqZ.DOjR.dPSn\",\n  \"role_id\": -35576676.95849789,\n  \"username\": \"Hxm Fw\\fYctcmd᠎M\\tAwshkslrzb\"\n}"
+										},
+										{
+											"name": "Invalid syntax",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/user-management/users/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"user-management",
+														"users",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the user to perform operation"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+										},
+										{
+											"name": "Access token is missing or invalid",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/user-management/users/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"user-management",
+														"users",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the user to perform operation"
+														}
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+										},
+										{
+											"name": "Internal Error",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/user-management/users/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"user-management",
+														"users",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the user to perform operation"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+										}
+									]
+								},
+								{
+									"name": "/user-management/users/:id",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "<Bearer Token>",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"password\": \"consectetur consequat incididunt\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/user-management/users/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"user-management",
+												"users",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "74737786.77843937",
+													"description": "(Required) ID of the user to perform operation"
+												}
+											]
+										},
+										"description": "Update user by user id"
+									},
+									"response": [
+										{
+											"name": "Request accepted",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"password\": \"consectetur consequat incididunt\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/user-management/users/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"user-management",
+														"users",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the user to perform operation"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+										},
+										{
+											"name": "Invalid syntax",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"password\": \"consectetur consequat incididunt\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/user-management/users/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"user-management",
+														"users",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the user to perform operation"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+										},
+										{
+											"name": "Access token is missing or invalid",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"password\": \"consectetur consequat incididunt\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/user-management/users/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"user-management",
+														"users",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the user to perform operation"
+														}
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+										},
+										{
+											"name": "Internal Error",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"password\": \"consectetur consequat incididunt\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/user-management/users/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"user-management",
+														"users",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the user to perform operation"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+										}
+									]
+								},
+								{
+									"name": "/user-management/users/:id",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "<Bearer Token>",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/user-management/users/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"user-management",
+												"users",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "74737786.77843937",
+													"description": "(Required) ID of the user to perform operation"
+												}
+											]
+										},
+										"description": "Delete user by user id"
+									},
+									"response": [
+										{
+											"name": "Request accepted",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/user-management/users/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"user-management",
+														"users",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the user to perform operation"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+										},
+										{
+											"name": "Invalid syntax",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/user-management/users/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"user-management",
+														"users",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the user to perform operation"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+										},
+										{
+											"name": "Access token is missing or invalid",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/user-management/users/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"user-management",
+														"users",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the user to perform operation"
+														}
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+										},
+										{
+											"name": "Internal Error",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/user-management/users/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"user-management",
+														"users",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the user to perform operation"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "/user-management/users",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "<Bearer Token>",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/user-management/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user-management",
+										"users"
+									]
+								},
+								"description": "Get all users"
+							},
+							"response": [
+								{
+									"name": "Request accepted",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/user-management/users",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"user-management",
+												"users"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"email\": \"Hicf@vb-Bh3U.3iy0dt.yP8.hjFL_veSaS.72KtG1.k4EKc.o4G4.vYZkDyYe.2-.NsI\",\n    \"role_id\": -2778121.9981843084,\n    \"username\": \"Or Fxmjil\"\n  },\n  {\n    \"email\": \"ET5he@8.Erx5u.s.2vHSc4BZ2vm.1r93nx1Xz.E.AL63FZ2Ey5x.VqJt0MTz6X.JVOJS86uhz.RiT.ITW\",\n    \"role_id\": -93350692.70888372,\n    \"username\": \"Ytdfsvdb Q Urnqosjk\"\n  }\n]"
+								},
+								{
+									"name": "Access token is missing or invalid",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/user-management/users",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"user-management",
+												"users"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								},
+								{
+									"name": "Internal Error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/user-management/users",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"user-management",
+												"users"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "/user-management/signup",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"admin@gmail.com\",\n  \"password\": \"Phananh272\",\n  \"role_id\": 2,\n  \"username\": \"Phan Duc Anh\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user-management/signup",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user-management",
+								"signup"
+							]
+						},
+						"description": "Create a new account"
+					},
+					"response": [
+						{
+							"name": "Account successfully created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"puXZgawf@kxGCCNFqse.efw1Pm1L.ApfzXeMl.JmPUjY.Nh.1H8UHskC7t.kN\",\n  \"password\": \"consequat aliqua ut non aute\",\n  \"role_id\": 88308465.80792105,\n  \"username\": \"Fkakdriggx᠎Myxxqnrefgo\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user-management/signup",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user-management",
+										"signup"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"email\": \"-aXeQxhQNa8@d.OX-6g.EJep\",\n  \"role_id\": 62933801.97412479,\n  \"user_id\": -57838476.66367494,\n  \"username\": \"Mnkxu᠎Pccsfymywss　Vycgnwofk\\u000bEzjirpy Oyuz Qdtyctd\"\n}"
+						},
+						{
+							"name": "Invalid syntax",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"puXZgawf@kxGCCNFqse.efw1Pm1L.ApfzXeMl.JmPUjY.Nh.1H8UHskC7t.kN\",\n  \"password\": \"consequat aliqua ut non aute\",\n  \"role_id\": 88308465.80792105,\n  \"username\": \"Fkakdriggx᠎Myxxqnrefgo\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user-management/signup",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user-management",
+										"signup"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+						},
+						{
+							"name": "Internal Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"puXZgawf@kxGCCNFqse.efw1Pm1L.ApfzXeMl.JmPUjY.Nh.1H8UHskC7t.kN\",\n  \"password\": \"consequat aliqua ut non aute\",\n  \"role_id\": 88308465.80792105,\n  \"username\": \"Fkakdriggx᠎Myxxqnrefgo\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user-management/signup",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user-management",
+										"signup"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+						}
+					]
+				},
+				{
+					"name": "/user-management/signin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"admin@gmail.com\",\n  \"password\": \"Phananh911\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user-management/signin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user-management",
+								"signin"
+							]
+						},
+						"description": "User login with email and password,"
+					},
+					"response": [
+						{
+							"name": "Successfully logged in",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"fiDaNke@wHZ.mdj.W7.5Sqh6rCD.WNclH3.Gh9DvVNq1.hKkoLW.iC4d4PLOsEj.RU.k.N6a.w5h3\",\n  \"password\": \"esseesse Excepteur dolor non\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user-management/signin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user-management",
+										"signin"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"jwt\": \"irure\"\n}"
+						},
+						{
+							"name": "Invalid syntax",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"fiDaNke@wHZ.mdj.W7.5Sqh6rCD.WNclH3.Gh9DvVNq1.hKkoLW.iC4d4PLOsEj.RU.k.N6a.w5h3\",\n  \"password\": \"esseesse Excepteur dolor non\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user-management/signin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user-management",
+										"signin"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+						},
+						{
+							"name": "Internal Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"fiDaNke@wHZ.mdj.W7.5Sqh6rCD.WNclH3.Gh9DvVNq1.hKkoLW.iC4d4PLOsEj.RU.k.N6a.w5h3\",\n  \"password\": \"esseesse Excepteur dolor non\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user-management/signin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user-management",
+										"signin"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "role-management/roles",
+			"item": [
+				{
+					"name": "{id}",
+					"item": [
+						{
+							"name": "/role-management/roles/:id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "<Bearer Token>",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/role-management/roles/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"role-management",
+										"roles",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "74737786.77843937",
+											"description": "(Required) ID of the role to perform operation"
+										}
+									]
+								},
+								"description": "Get role by ID"
+							},
+							"response": [
+								{
+									"name": "Request accepted",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/role-management/roles/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"role-management",
+												"roles",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "74737786.77843937",
+													"description": "(Required) ID of the role to perform operation"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"name\": \"quis voluptate et incididunt\",\n  \"role_id\": 47130368.75578046\n}"
+								},
+								{
+									"name": "Invalid syntax",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/role-management/roles/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"role-management",
+												"roles",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "74737786.77843937",
+													"description": "(Required) ID of the role to perform operation"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								},
+								{
+									"name": "Access token is missing or invalid",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/role-management/roles/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"role-management",
+												"roles",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "74737786.77843937",
+													"description": "(Required) ID of the role to perform operation"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								},
+								{
+									"name": "Internal Error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/role-management/roles/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"role-management",
+												"roles",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "74737786.77843937",
+													"description": "(Required) ID of the role to perform operation"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								}
+							]
+						},
+						{
+							"name": "/role-management/roles/:id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "<Bearer Token>",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/role-management/roles/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"role-management",
+										"roles",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "74737786.77843937",
+											"description": "(Required) ID of the role to perform operation"
+										}
+									]
+								},
+								"description": "Delete role by ID"
+							},
+							"response": [
+								{
+									"name": "Request accepted",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/role-management/roles/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"role-management",
+												"roles",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "74737786.77843937",
+													"description": "(Required) ID of the role to perform operation"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								},
+								{
+									"name": "Invalid syntax",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/role-management/roles/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"role-management",
+												"roles",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "74737786.77843937",
+													"description": "(Required) ID of the role to perform operation"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								},
+								{
+									"name": "Access token is missing or invalid",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/role-management/roles/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"role-management",
+												"roles",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "74737786.77843937",
+													"description": "(Required) ID of the role to perform operation"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								},
+								{
+									"name": "Internal Error",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/role-management/roles/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"role-management",
+												"roles",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "74737786.77843937",
+													"description": "(Required) ID of the role to perform operation"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "/role-management/roles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "<Bearer Token>",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/role-management/roles",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"role-management",
+								"roles"
+							]
+						},
+						"description": "Get all roles in database"
+					},
+					"response": [
+						{
+							"name": "Request accepted",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/role-management/roles",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"role-management",
+										"roles"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"name\": \"amet consectetur\",\n    \"role_id\": 24084931.68621169\n  },\n  {\n    \"name\": \"commodo proident officia consequat magna\",\n    \"role_id\": 6543260.353998154\n  }\n]"
+						},
+						{
+							"name": "Access token is missing or invalid",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/role-management/roles",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"role-management",
+										"roles"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+						},
+						{
+							"name": "Internal Error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/role-management/roles",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"role-management",
+										"roles"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+						}
+					]
+				},
+				{
+					"name": "/role-management/roles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "<Bearer Token>",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"anim proident in Lorem\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/role-management/roles",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"role-management",
+								"roles"
+							]
+						},
+						"description": "Create a new role"
+					},
+					"response": [
+						{
+							"name": "Request accepted",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"anim proident in Lorem\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/role-management/roles",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"role-management",
+										"roles"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"role_id\": \"cupidatat commodo officia quis\"\n}"
+						},
+						{
+							"name": "Invalid syntax",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"anim proident in Lorem\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/role-management/roles",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"role-management",
+										"roles"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+						},
+						{
+							"name": "Access token is missing or invalid",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"anim proident in Lorem\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/role-management/roles",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"role-management",
+										"roles"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+						},
+						{
+							"name": "Internal Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"anim proident in Lorem\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/role-management/roles",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"role-management",
+										"roles"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "permission-management/permissions",
+			"item": [
+				{
+					"name": "{id}",
+					"item": [
+						{
+							"name": "/permission-management/permissions/:id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "<Bearer Token>",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/permission-management/permissions/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"permission-management",
+										"permissions",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "74737786.77843937",
+											"description": "(Required) ID of the permission to perform operation"
+										}
+									]
+								},
+								"description": "Get permission by ID"
+							},
+							"response": [
+								{
+									"name": "Request accepted",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/permission-management/permissions/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"permission-management",
+												"permissions",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "74737786.77843937",
+													"description": "(Required) ID of the permission to perform operation"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"name\": \"veniam enim\",\n  \"permission_id\": -80520928.3988145,\n  \"scope\": \"Ut dolore id\"\n}"
+								},
+								{
+									"name": "Invalid syntax",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/permission-management/permissions/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"permission-management",
+												"permissions",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "74737786.77843937",
+													"description": "(Required) ID of the permission to perform operation"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								},
+								{
+									"name": "Access token is missing or invalid",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/permission-management/permissions/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"permission-management",
+												"permissions",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "74737786.77843937",
+													"description": "(Required) ID of the permission to perform operation"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								},
+								{
+									"name": "Internal Error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/permission-management/permissions/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"permission-management",
+												"permissions",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "74737786.77843937",
+													"description": "(Required) ID of the permission to perform operation"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								}
+							]
+						},
+						{
+							"name": "/permission-management/permissions/:id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "<Bearer Token>",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/permission-management/permissions/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"permission-management",
+										"permissions",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "74737786.77843937",
+											"description": "(Required) ID of the permission to perform operation"
+										}
+									]
+								},
+								"description": "Delete permission by ID"
+							},
+							"response": [
+								{
+									"name": "Request accepted",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/permission-management/permissions/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"permission-management",
+												"permissions",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "74737786.77843937",
+													"description": "(Required) ID of the permission to perform operation"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								},
+								{
+									"name": "Invalid syntax",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/permission-management/permissions/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"permission-management",
+												"permissions",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "74737786.77843937",
+													"description": "(Required) ID of the permission to perform operation"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								},
+								{
+									"name": "Access token is missing or invalid",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/permission-management/permissions/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"permission-management",
+												"permissions",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "74737786.77843937",
+													"description": "(Required) ID of the permission to perform operation"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								},
+								{
+									"name": "Internal Error",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/permission-management/permissions/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"permission-management",
+												"permissions",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "74737786.77843937",
+													"description": "(Required) ID of the permission to perform operation"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "/permission-management/permissions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "<Bearer Token>",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/permission-management/permissions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"permission-management",
+								"permissions"
+							]
+						},
+						"description": "Get all permissions in database"
+					},
+					"response": [
+						{
+							"name": "Request accepted",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/permission-management/permissions",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"permission-management",
+										"permissions"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"name\": \"dolore exercitation consequat amet\",\n    \"permission_id\": -73287617.17134391,\n    \"scope\": \"proident est eu\"\n  },\n  {\n    \"name\": \"nulla aute dolore veniam\",\n    \"permission_id\": -74268211.73063703,\n    \"scope\": \"incididunt ea in officia\"\n  }\n]"
+						},
+						{
+							"name": "Access token is missing or invalid",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/permission-management/permissions",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"permission-management",
+										"permissions"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+						},
+						{
+							"name": "Internal Error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/permission-management/permissions",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"permission-management",
+										"permissions"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+						}
+					]
+				},
+				{
+					"name": "/permission-management/permissions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "<Bearer Token>",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"irure proident in\",\n  \"scope\": \"id\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/permission-management/permissions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"permission-management",
+								"permissions"
+							]
+						},
+						"description": "Create a new permission"
+					},
+					"response": [
+						{
+							"name": "Request accepted",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"irure proident in\",\n  \"scope\": \"id\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/permission-management/permissions",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"permission-management",
+										"permissions"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"permission_id\": 62151924.57705322\n}"
+						},
+						{
+							"name": "Invalid syntax",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"irure proident in\",\n  \"scope\": \"id\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/permission-management/permissions",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"permission-management",
+										"permissions"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+						},
+						{
+							"name": "Access token is missing or invalid",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"irure proident in\",\n  \"scope\": \"id\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/permission-management/permissions",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"permission-management",
+										"permissions"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+						},
+						{
+							"name": "Internal Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"irure proident in\",\n  \"scope\": \"id\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/permission-management/permissions",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"permission-management",
+										"permissions"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "granting-management/granting",
+			"item": [
+				{
+					"name": "/granting-management/granting",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "<Bearer Token>",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/granting-management/granting",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"granting-management",
+								"granting"
+							]
+						},
+						"description": "Get all the granted permission"
+					},
+					"response": [
+						{
+							"name": "Request accepted",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/granting-management/granting",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"granting-management",
+										"granting"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"permission_id\": 40392097.18064445,\n    \"role_id\": -88434843.53526598\n  },\n  {\n    \"permission_id\": -62834538.44914706,\n    \"role_id\": 74695376.07000291\n  }\n]"
+						},
+						{
+							"name": "Access token is missing or invalid",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/granting-management/granting",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"granting-management",
+										"granting"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+						},
+						{
+							"name": "Internal Error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/granting-management/granting",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"granting-management",
+										"granting"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+						}
+					]
+				},
+				{
+					"name": "/granting-management/granting",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "<Bearer Token>",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"permission_id\": 7078753.714594036,\n  \"role_id\": 44217879.04999083\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/granting-management/granting",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"granting-management",
+								"granting"
+							]
+						},
+						"description": "Granting permission to a role"
+					},
+					"response": [
+						{
+							"name": "Request accepted",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"permission_id\": 7078753.714594036,\n  \"role_id\": 44217879.04999083\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/granting-management/granting",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"granting-management",
+										"granting"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+						},
+						{
+							"name": "Invalid syntax",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"permission_id\": 7078753.714594036,\n  \"role_id\": 44217879.04999083\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/granting-management/granting",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"granting-management",
+										"granting"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+						},
+						{
+							"name": "Access token is missing or invalid",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"permission_id\": 7078753.714594036,\n  \"role_id\": 44217879.04999083\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/granting-management/granting",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"granting-management",
+										"granting"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+						},
+						{
+							"name": "Internal Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"permission_id\": 7078753.714594036,\n  \"role_id\": 44217879.04999083\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/granting-management/granting",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"granting-management",
+										"granting"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+						}
+					]
+				},
+				{
+					"name": "/granting-management/granting",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "<Bearer Token>",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/granting-management/granting?role_id=74737786.77843937&permission_id=74737786.77843937",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"granting-management",
+								"granting"
+							],
+							"query": [
+								{
+									"key": "role_id",
+									"value": "74737786.77843937",
+									"description": "(Required) "
+								},
+								{
+									"key": "permission_id",
+									"value": "74737786.77843937",
+									"description": "(Required) "
+								}
+							]
+						},
+						"description": "Delete a granted permission of a role"
+					},
+					"response": [
+						{
+							"name": "Request accepted",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/granting-management/granting?role_id=74737786.77843937&permission_id=74737786.77843937",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"granting-management",
+										"granting"
+									],
+									"query": [
+										{
+											"key": "role_id",
+											"value": "74737786.77843937"
+										},
+										{
+											"key": "permission_id",
+											"value": "74737786.77843937"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+						},
+						{
+							"name": "Invalid syntax",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/granting-management/granting?role_id=74737786.77843937&permission_id=74737786.77843937",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"granting-management",
+										"granting"
+									],
+									"query": [
+										{
+											"key": "role_id",
+											"value": "74737786.77843937"
+										},
+										{
+											"key": "permission_id",
+											"value": "74737786.77843937"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+						},
+						{
+							"name": "Access token is missing or invalid",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/granting-management/granting?role_id=74737786.77843937&permission_id=74737786.77843937",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"granting-management",
+										"granting"
+									],
+									"query": [
+										{
+											"key": "role_id",
+											"value": "74737786.77843937"
+										},
+										{
+											"key": "permission_id",
+											"value": "74737786.77843937"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+						},
+						{
+							"name": "Internal Error",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/granting-management/granting?role_id=74737786.77843937&permission_id=74737786.77843937",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"granting-management",
+										"granting"
+									],
+									"query": [
+										{
+											"key": "role_id",
+											"value": "74737786.77843937"
+										},
+										{
+											"key": "permission_id",
+											"value": "74737786.77843937"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "post-management",
+			"item": [
+				{
+					"name": "post",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "/post-management/post/:id",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/post-management/post/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"post-management",
+												"post",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "10",
+													"description": "(Required) ID of the permission to perform operation"
+												}
+											]
+										},
+										"description": "Get user's posts by ID"
+									},
+									"response": [
+										{
+											"name": "Request accepted",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/post-management/post/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"post-management",
+														"post",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the permission to perform operation"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"content\": \"dolore nostrud ipsum voluptate officia\",\n  \"created_at\": \"Excepteur quis\",\n  \"post_id\": 55349869.66531226,\n  \"updated_at\": \"adipisicing reprehenderit\",\n  \"user_id\": 34300945.506062716\n}"
+										},
+										{
+											"name": "Access token is missing or invalid",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/post-management/post/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"post-management",
+														"post",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the permission to perform operation"
+														}
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+										},
+										{
+											"name": "Internal Error",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/post-management/post/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"post-management",
+														"post",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the permission to perform operation"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+										}
+									]
+								},
+								{
+									"name": "/post-management/post/:id",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"content\": \"labore\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/post-management/post/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"post-management",
+												"post",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "2",
+													"description": "(Required) ID of the permission to perform operation"
+												}
+											]
+										},
+										"description": "Update user's post by ID"
+									},
+									"response": [
+										{
+											"name": "Request accepted",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"content\": \"labore\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/post-management/post/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"post-management",
+														"post",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the permission to perform operation"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+										},
+										{
+											"name": "Invalid syntax",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"content\": \"labore\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/post-management/post/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"post-management",
+														"post",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the permission to perform operation"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+										},
+										{
+											"name": "Access token is missing or invalid",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"content\": \"labore\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/post-management/post/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"post-management",
+														"post",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the permission to perform operation"
+														}
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+										},
+										{
+											"name": "Internal Error",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"content\": \"labore\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/post-management/post/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"post-management",
+														"post",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the permission to perform operation"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+										}
+									]
+								},
+								{
+									"name": "/post-management/post/:id",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/post-management/post/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"post-management",
+												"post",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "10",
+													"description": "(Required) ID of the permission to perform operation"
+												}
+											]
+										},
+										"description": "Delete user's post by ID"
+									},
+									"response": [
+										{
+											"name": "Request accepted",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/post-management/post/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"post-management",
+														"post",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the permission to perform operation"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+										},
+										{
+											"name": "Invalid syntax",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/post-management/post/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"post-management",
+														"post",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the permission to perform operation"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+										},
+										{
+											"name": "Access token is missing or invalid",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/post-management/post/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"post-management",
+														"post",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the permission to perform operation"
+														}
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+										},
+										{
+											"name": "Internal Error",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/post-management/post/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"post-management",
+														"post",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the permission to perform operation"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "/post-management/post",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/post-management/post",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"post-management",
+										"post"
+									]
+								},
+								"description": "Get user's posts"
+							},
+							"response": [
+								{
+									"name": "Request accepted",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/post-management/post?page=74737786.77843937",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"post-management",
+												"post"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "74737786.77843937"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"content\": \"est Duis id\",\n    \"created_at\": \"amet\",\n    \"post_id\": -92554177.20436041,\n    \"updated_at\": \"enim aute\",\n    \"user_id\": -16054821.25128086\n  },\n  {\n    \"content\": \"in deserunt amet do\",\n    \"created_at\": \"esse dolore\",\n    \"post_id\": 8703650.242611885,\n    \"updated_at\": \"id Duis elit est\",\n    \"user_id\": 25866990.2581425\n  }\n]"
+								},
+								{
+									"name": "Redirect when number of posts greater than 10",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/post-management/post?page=74737786.77843937",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"post-management",
+												"post"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "74737786.77843937"
+												}
+											]
+										}
+									},
+									"status": "Moved Permanently",
+									"code": 301,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Access token is missing or invalid",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/post-management/post?page=74737786.77843937",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"post-management",
+												"post"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "74737786.77843937"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								},
+								{
+									"name": "Internal Error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/post-management/post?page=74737786.77843937",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"post-management",
+												"post"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "74737786.77843937"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								}
+							]
+						},
+						{
+							"name": "/post-management/post",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"content\": \"TEST03\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/post-management/post",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"post-management",
+										"post"
+									]
+								},
+								"description": "Create a new post"
+							},
+							"response": [
+								{
+									"name": "Request accepted",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"content\": \"labore\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/post-management/post",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"post-management",
+												"post"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								},
+								{
+									"name": "Invalid syntax",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"content\": \"labore\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/post-management/post",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"post-management",
+												"post"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								},
+								{
+									"name": "Access token is missing or invalid",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"content\": \"labore\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/post-management/post",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"post-management",
+												"post"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								},
+								{
+									"name": "Internal Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"content\": \"labore\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/post-management/post",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"post-management",
+												"post"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "posts",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "/post-management/posts/:id",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/post-management/posts/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"post-management",
+												"posts",
+												":id"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "0",
+													"description": "The page of the posts' list",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "1",
+													"description": "(Required) ID of the permission to perform operation"
+												}
+											]
+										},
+										"description": "Get user's posts by user ID"
+									},
+									"response": [
+										{
+											"name": "Request accepted",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/post-management/posts/:id?page=74737786.77843937",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"post-management",
+														"posts",
+														":id"
+													],
+													"query": [
+														{
+															"key": "page",
+															"value": "74737786.77843937"
+														}
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the permission to perform operation"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"content\": \"est Duis id\",\n    \"created_at\": \"amet\",\n    \"post_id\": -92554177.20436041,\n    \"updated_at\": \"enim aute\",\n    \"user_id\": -16054821.25128086\n  },\n  {\n    \"content\": \"in deserunt amet do\",\n    \"created_at\": \"esse dolore\",\n    \"post_id\": 8703650.242611885,\n    \"updated_at\": \"id Duis elit est\",\n    \"user_id\": 25866990.2581425\n  }\n]"
+										},
+										{
+											"name": "Redirect when number of posts greater than 10",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/post-management/posts/:id?page=74737786.77843937",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"post-management",
+														"posts",
+														":id"
+													],
+													"query": [
+														{
+															"key": "page",
+															"value": "74737786.77843937"
+														}
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the permission to perform operation"
+														}
+													]
+												}
+											},
+											"status": "Moved Permanently",
+											"code": 301,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Access token is missing or invalid",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/post-management/posts/:id?page=74737786.77843937",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"post-management",
+														"posts",
+														":id"
+													],
+													"query": [
+														{
+															"key": "page",
+															"value": "74737786.77843937"
+														}
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the permission to perform operation"
+														}
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+										},
+										{
+											"name": "Internal Error",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/post-management/posts/:id?page=74737786.77843937",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"post-management",
+														"posts",
+														":id"
+													],
+													"query": [
+														{
+															"key": "page",
+															"value": "74737786.77843937"
+														}
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the permission to perform operation"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+										}
+									]
+								},
+								{
+									"name": "/post-management/posts/:id",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"content\": \"labore\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/post-management/posts/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"post-management",
+												"posts",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "1",
+													"description": "(Required) ID of the permission to perform operation"
+												}
+											]
+										},
+										"description": "Update user's post by ID"
+									},
+									"response": [
+										{
+											"name": "Request accepted",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"content\": \"labore\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/post-management/posts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"post-management",
+														"posts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the permission to perform operation"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+										},
+										{
+											"name": "Invalid syntax",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"content\": \"labore\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/post-management/posts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"post-management",
+														"posts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the permission to perform operation"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+										},
+										{
+											"name": "Access token is missing or invalid",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"content\": \"labore\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/post-management/posts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"post-management",
+														"posts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the permission to perform operation"
+														}
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+										},
+										{
+											"name": "Internal Error",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"content\": \"labore\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/post-management/posts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"post-management",
+														"posts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the permission to perform operation"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+										}
+									]
+								},
+								{
+									"name": "/post-management/posts/:id",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/post-management/posts/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"post-management",
+												"posts",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "11",
+													"description": "(Required) ID of the permission to perform operation"
+												}
+											]
+										},
+										"description": "Delete user's post by ID"
+									},
+									"response": [
+										{
+											"name": "Request accepted",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/post-management/posts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"post-management",
+														"posts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the permission to perform operation"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+										},
+										{
+											"name": "Invalid syntax",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/post-management/posts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"post-management",
+														"posts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the permission to perform operation"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+										},
+										{
+											"name": "Access token is missing or invalid",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/post-management/posts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"post-management",
+														"posts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the permission to perform operation"
+														}
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+										},
+										{
+											"name": "Internal Error",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/post-management/posts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"post-management",
+														"posts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "74737786.77843937",
+															"description": "(Required) ID of the permission to perform operation"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "/post-management/posts",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/post-management/posts?page=2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"post-management",
+										"posts"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "2",
+											"description": "The page of the posts' list"
+										}
+									]
+								},
+								"description": "Get all user's posts"
+							},
+							"response": [
+								{
+									"name": "Request accepted",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/post-management/posts?page=74737786.77843937",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"post-management",
+												"posts"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "74737786.77843937"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"content\": \"est Duis id\",\n    \"created_at\": \"amet\",\n    \"post_id\": -92554177.20436041,\n    \"updated_at\": \"enim aute\",\n    \"user_id\": -16054821.25128086\n  },\n  {\n    \"content\": \"in deserunt amet do\",\n    \"created_at\": \"esse dolore\",\n    \"post_id\": 8703650.242611885,\n    \"updated_at\": \"id Duis elit est\",\n    \"user_id\": 25866990.2581425\n  }\n]"
+								},
+								{
+									"name": "Redirect when number of posts greater than 10",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/post-management/posts?page=74737786.77843937",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"post-management",
+												"posts"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "74737786.77843937"
+												}
+											]
+										}
+									},
+									"status": "Moved Permanently",
+									"code": 301,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Access token is missing or invalid",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/post-management/posts?page=74737786.77843937",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"post-management",
+												"posts"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "74737786.77843937"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								},
+								{
+									"name": "Internal Error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/post-management/posts?page=74737786.77843937",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"post-management",
+												"posts"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "74737786.77843937"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"elit magna incididunt\"\n}"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsImV4cCI6MTY0NTIwMjI1Mywicm9sZSI6Mn0.mIp_thDvOHWyA-MjjZ8yXT53ZVZzQlZqZTnplqyloRY",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "/",
+			"type": "string"
+		}
+	]
+}
