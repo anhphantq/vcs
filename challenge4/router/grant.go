@@ -1,9 +1,9 @@
 package router
 
 import (
-	"challenge3/middleware"
-	"challenge3/models"
-	"challenge3/services"
+	"challenge4/middleware"
+	"challenge4/models"
+	"challenge4/services"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -12,26 +12,26 @@ import (
 var grantService services.GrantService
 
 func hdGetGrant(c *gin.Context) {
-	var rolepermissions []models.RolePermission
+	var Rolepermissions []models.Rolepermission
 
-	rolepermissions, err := grantService.GetAllGrant()
+	Rolepermissions, err := grantService.GetAllGrant()
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
 		return
 	}
 
-	c.JSON(http.StatusAccepted, rolepermissions)
+	c.JSON(http.StatusAccepted, Rolepermissions)
 }
 
 func hdCreateGrant(c *gin.Context) {
-	var rolepermission models.RolePermission
-	if err := c.ShouldBind(&rolepermission); err != nil {
+	var Rolepermission models.Rolepermission
+	if err := c.ShouldBind(&Rolepermission); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something when wrong in the server"})
 		return
 	}
 
-	rolepermission, err := grantService.SaveGrant(rolepermission)
+	Rolepermission, err := grantService.InsertGrant(Rolepermission)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something when wrong in the server or the role had been granted"})
 		return
@@ -41,13 +41,13 @@ func hdCreateGrant(c *gin.Context) {
 }
 
 func hdDeleteGrant(c *gin.Context) {
-	var rolepermission models.RolePermission
-	if err := c.ShouldBind(&rolepermission); err != nil {
+	var Rolepermission models.Rolepermission
+	if err := c.ShouldBind(&Rolepermission); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something when wrong in the server"})
 		return
 	}
 
-	err := grantService.DeleteGrant(rolepermission)
+	err := grantService.DeleteGrantSrv(Rolepermission)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something when wrong in the server or wrong input"})
@@ -57,8 +57,8 @@ func hdDeleteGrant(c *gin.Context) {
 	c.JSON(http.StatusAccepted, gin.H{"message": "Deleted"})
 }
 
-func initGrantRouter(router *gin.RouterGroup, userService services.UserService, grantService services.GrantService) {
-	grantService = grantService
+func initGrantRouter(router *gin.RouterGroup, userService services.UserService, grantservice services.GrantService) {
+	grantService = grantservice
 	router.GET("/granting", middleware.ValidationMiddleware(templateRouter), middleware.RoleValidationMiddleware(userService, "admin"), hdGetGrant)
 	router.POST("/granting", middleware.ValidationMiddleware(templateRouter), middleware.RoleValidationMiddleware(userService, "admin"), hdCreateGrant)
 	router.DELETE("/granting", middleware.ValidationMiddleware(templateRouter), middleware.RoleValidationMiddleware(userService, "admin"), hdDeleteGrant)

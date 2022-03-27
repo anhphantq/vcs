@@ -1,10 +1,9 @@
 package router
 
 import (
-	"challenge3/db"
-	"challenge3/middleware"
-	"challenge3/models"
-	"challenge3/services"
+	"challenge4/middleware"
+	"challenge4/models"
+	"challenge4/services"
 	"net/http"
 	"strconv"
 
@@ -12,64 +11,37 @@ import (
 )
 
 var url = "http://localhost:8080"
+var postService services.PostService
 
 func hdGetPost(c *gin.Context) {
-	connection := db.GetDatabase()
-	defer db.Closedatabase(connection)
-
 	tmp, _ := c.Get("user")
 	user, _ := tmp.(models.Account)
 
-	var posts []models.Post
-
-	result := connection.Raw("select * from posts where user_id = ?", user.User_id).Scan(&posts)
-
-	if result.Error != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server or no posts founded"})
-		return
-	}
-
 	page := c.Query("page")
 
-	if len(posts) > 10 && page == "" {
+	if page == "" {
 		c.Redirect(http.StatusPermanentRedirect, url+"/post-management/post?page=0")
 		return
 	}
 
-	var numP int
+	pageID, err := strconv.Atoi(page)
 
-	if len(posts)%10 == 0 {
-		numP = len(posts) / 10
-	} else {
-		numP = len(posts)/10 + 1
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Something went wrong with query params"})
+		return
 	}
 
-	if page != "" {
-		page, err := strconv.Atoi(page)
-		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
-			return
-		}
+	posts, err := postService.GetPostByUserID(user.User_id, pageID)
 
-		if page+1 > numP {
-			c.JSON(http.StatusBadRequest, gin.H{"message": "Page is not defined"})
-			return
-		}
-
-		if page+1 == numP {
-			posts = posts[10*page:]
-		} else {
-			posts = posts[10*page : 10*(page+1)-1]
-		}
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Wrong page number or something went wrong in the server"})
+		return
 	}
 
 	c.JSON(http.StatusAccepted, posts)
 }
 
 func hdCreatePost(c *gin.Context) {
-	connection := db.GetDatabase()
-	defer db.Closedatabase(connection)
-
 	var post models.Post
 
 	err := c.ShouldBind(&post)
@@ -82,9 +54,11 @@ func hdCreatePost(c *gin.Context) {
 	tmp, _ := c.Get("user")
 	user, _ := tmp.(models.Account)
 
-	result := connection.Raw("insert into posts values(default,?,default,default,?) returning *", post.Content, user.User_id).Scan(&post)
+	post.User_id = user.User_id
 
-	if result.Error != nil {
+	post, err = postService.InsertPost(post)
+
+	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
 		return
 	}
@@ -93,9 +67,6 @@ func hdCreatePost(c *gin.Context) {
 }
 
 func hdUpdatePostByID(c *gin.Context) {
-	connection := db.GetDatabase()
-	defer db.Closedatabase(connection)
-
 	id, err := strconv.Atoi(c.Param("id"))
 
 	if err != nil {
@@ -106,23 +77,34 @@ func hdUpdatePostByID(c *gin.Context) {
 	tmp, _ := c.Get("user")
 	user, _ := tmp.(models.Account)
 
-	var post models.Post
+	var postTMP models.Post
 
-	err = c.ShouldBind(&post)
+	err = c.ShouldBind(&postTMP)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
 		return
 	}
 
-	result := connection.Exec("update posts set content = ? where user_id = ? and post_id = ?", post.Content, user.User_id, id)
+	var post models.Post
 
-	if result.Error != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
+	post, err = postService.GetPostByID(uint(id))
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server or post does not exists"})
 		return
 	}
 
-	if result.RowsAffected < 1 {
-		c.JSON(http.StatusBadRequest, gin.H{"message": "Wrong post's ID"})
+	if post.User_id != user.User_id {
+		c.JSON(http.StatusUnauthorized, gin.H{"message": "Post does not belong to user"})
+		return
+	}
+
+	post.Content = postTMP.Content
+
+	post, err = postService.UpdatePostSrv(post)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server or wrong post id"})
 		return
 	}
 
@@ -130,9 +112,6 @@ func hdUpdatePostByID(c *gin.Context) {
 }
 
 func hdGetPostByID(c *gin.Context) {
-	connection := db.GetDatabase()
-	defer db.Closedatabase(connection)
-
 	id, err := strconv.Atoi(c.Param("id"))
 
 	if err != nil {
@@ -145,9 +124,9 @@ func hdGetPostByID(c *gin.Context) {
 
 	var post models.Post
 
-	result := connection.Raw("select * from posts where user_id = ? and post_id = ?", user.User_id, id).Scan(&post)
+	post, err = postService.GetPostByID(uint(id))
 
-	if result.Error != nil {
+	if err != nil || post.User_id != user.User_id {
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server or wrong post's ID"})
 		return
 	}
@@ -156,9 +135,6 @@ func hdGetPostByID(c *gin.Context) {
 }
 
 func hdDeletePostByID(c *gin.Context) {
-	connection := db.GetDatabase()
-	defer db.Closedatabase(connection)
-
 	id, err := strconv.Atoi(c.Param("id"))
 
 	if err != nil {
@@ -169,15 +145,17 @@ func hdDeletePostByID(c *gin.Context) {
 	tmp, _ := c.Get("user")
 	user, _ := tmp.(models.Account)
 
-	result := connection.Exec("delete from posts where user_id = ? and post_id = ?", user.User_id, id)
+	post, err := postService.GetPostByID(uint(id))
 
-	if result.Error != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
+	if err != nil || post.User_id != user.User_id {
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server or wrong post's ID"})
 		return
 	}
 
-	if result.RowsAffected < 1 {
-		c.JSON(http.StatusBadRequest, gin.H{"message": "Wrong post's ID"})
+	err = postService.DeletePostSrv(uint(id))
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server or wrong post id"})
 		return
 	}
 
@@ -185,116 +163,32 @@ func hdDeletePostByID(c *gin.Context) {
 }
 
 func hdGetPosts(c *gin.Context) {
-	connection := db.GetDatabase()
-	defer db.Closedatabase(connection)
-
 	var posts []models.Post
-
-	result := connection.Raw("select * from posts").Scan(&posts)
-
-	if result.Error != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
-		return
-	}
 
 	page := c.Query("page")
 
-	if len(posts) > 10 && page == "" {
+	if page == "" {
 		c.Redirect(http.StatusPermanentRedirect, url+"/post-management/posts?page=0")
 		return
 	}
 
-	var numP int
-
-	if len(posts)%10 == 0 {
-		numP = len(posts) / 10
-	} else {
-		numP = len(posts)/10 + 1
-	}
-
-	if page != "" {
-		page, err := strconv.Atoi(page)
-		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
-			return
-		}
-
-		if page+1 > numP {
-			c.JSON(http.StatusBadRequest, gin.H{"message": "Page is not defined"})
-			return
-		}
-
-		if page+1 == numP {
-			posts = posts[10*page:]
-		} else {
-			posts = posts[10*page : 10*(page+1)-1]
-		}
-	}
-
-	c.JSON(http.StatusAccepted, posts)
-}
-
-func hdGetPostsByUserID(c *gin.Context) {
-	connection := db.GetDatabase()
-	defer db.Closedatabase(connection)
-
-	id, err := strconv.Atoi(c.Param("id"))
-
+	pageID, err := strconv.Atoi(page)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
 		return
 	}
 
-	var posts []models.Post
+	posts, err = postService.GetAllPosts(pageID)
 
-	result := connection.Raw("select * from posts where user_id = ?", id).Scan(&posts)
-
-	if result.Error != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server or no posts founded"})
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Wrong page number or something went wrong in the server"})
 		return
-	}
-
-	page := c.Query("page")
-
-	if len(posts) > 10 && page == "" {
-		c.Redirect(http.StatusPermanentRedirect, url+"/post-management/posts/"+c.Param("id")+"?page=0")
-		return
-	}
-
-	var numP int
-
-	if len(posts)%10 == 0 {
-		numP = len(posts) / 10
-	} else {
-		numP = len(posts)/10 + 1
-	}
-
-	if page != "" {
-		page, err := strconv.Atoi(page)
-		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
-			return
-		}
-
-		if page+1 > numP {
-			c.JSON(http.StatusBadRequest, gin.H{"message": "Page is not defined"})
-			return
-		}
-
-		if page+1 == numP {
-			posts = posts[10*page:]
-		} else {
-			posts = posts[10*page : 10*(page+1)-1]
-		}
 	}
 
 	c.JSON(http.StatusAccepted, posts)
 }
 
-func hdUpdatePostsByID(c *gin.Context) {
-	connection := db.GetDatabase()
-	defer db.Closedatabase(connection)
-
+func hdGetPostsByID(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 
 	if err != nil {
@@ -304,21 +198,47 @@ func hdUpdatePostsByID(c *gin.Context) {
 
 	var post models.Post
 
-	err = c.ShouldBind(&post)
+	post, err = postService.GetPostByID(uint(id))
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server or wrong post's ID"})
+		return
+	}
+
+	c.JSON(http.StatusAccepted, post)
+}
+
+func hdUpdatePostsByID(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("id"))
+
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
 		return
 	}
 
-	result := connection.Exec("update posts set content = ? where post_id = ?", post.Content, id)
+	var postTMP models.Post
 
-	if result.Error != nil {
+	err = c.ShouldBind(&postTMP)
+	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
 		return
 	}
 
-	if result.RowsAffected < 1 {
-		c.JSON(http.StatusBadRequest, gin.H{"message": "Wrong post's ID"})
+	var post models.Post
+
+	post, err = postService.GetPostByID(uint(id))
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server or post does not exists"})
+		return
+	}
+
+	post.Content = postTMP.Content
+
+	post, err = postService.UpdatePostSrv(post)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server or wrong post id"})
 		return
 	}
 
@@ -326,8 +246,6 @@ func hdUpdatePostsByID(c *gin.Context) {
 }
 
 func hdDeletePostsByID(c *gin.Context) {
-	connection := db.GetDatabase()
-	defer db.Closedatabase(connection)
 
 	id, err := strconv.Atoi(c.Param("id"))
 
@@ -336,31 +254,27 @@ func hdDeletePostsByID(c *gin.Context) {
 		return
 	}
 
-	result := connection.Exec("delete from posts where post_id = ?", id)
+	err = postService.DeletePostSrv(uint(id))
 
-	if result.Error != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
-		return
-	}
-
-	if result.RowsAffected < 1 {
-		c.JSON(http.StatusBadRequest, gin.H{"message": "Wrong post's ID"})
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server or wrong post id"})
 		return
 	}
 
 	c.JSON(http.StatusAccepted, gin.H{"message": "Post deleted"})
 }
 
-func InitPostRouter(router *gin.RouterGroup, srv services.Service) {
-	router.GET("/post", middleware.ValidationMiddleware(templateRouter), middleware.AuthMiddleware(srv), hdGetPost)
-	router.POST("/post", middleware.ValidationMiddleware(templateRouter), middleware.AuthMiddleware(srv), hdCreatePost)
+func InitPostRouter(router *gin.RouterGroup, userService services.UserService, postservice services.PostService) {
+	postService = postservice
+	router.GET("/post", middleware.ValidationMiddleware(templateRouter), middleware.AuthMiddleware(userService), hdGetPost)
+	router.POST("/post", middleware.ValidationMiddleware(templateRouter), middleware.AuthMiddleware(userService), hdCreatePost)
 
-	router.GET("/post/:id", middleware.ValidationMiddleware(templateRouter), middleware.AuthMiddleware(srv), hdGetPostByID)
-	router.PUT("/post/:id", middleware.ValidationMiddleware(templateRouter), middleware.AuthMiddleware(srv), hdUpdatePostByID)
-	router.DELETE("/post/:id", middleware.ValidationMiddleware(templateRouter), middleware.AuthMiddleware(srv), hdDeletePostByID)
+	router.GET("/post/:id", middleware.ValidationMiddleware(templateRouter), middleware.AuthMiddleware(userService), hdGetPostByID)
+	router.PUT("/post/:id", middleware.ValidationMiddleware(templateRouter), middleware.AuthMiddleware(userService), hdUpdatePostByID)
+	router.DELETE("/post/:id", middleware.ValidationMiddleware(templateRouter), middleware.AuthMiddleware(userService), hdDeletePostByID)
 
-	router.GET("/posts", middleware.ValidationMiddleware(templateRouter), middleware.AuthMiddleware(srv), middleware.AuthAdminMiddleware(srv), hdGetPosts)
-	router.GET("/posts/:id", middleware.ValidationMiddleware(templateRouter), middleware.AuthMiddleware(srv), middleware.AuthAdminMiddleware(srv), hdGetPostsByUserID)
-	router.PUT("/posts/:id", middleware.ValidationMiddleware(templateRouter), middleware.AuthMiddleware(srv), middleware.AuthAdminMiddleware(srv), hdUpdatePostsByID)
-	router.DELETE("/posts/:id", middleware.ValidationMiddleware(templateRouter), middleware.AuthMiddleware(srv), middleware.AuthAdminMiddleware(srv), hdDeletePostsByID)
+	router.GET("/posts", middleware.ValidationMiddleware(templateRouter), middleware.AuthMiddleware(userService), middleware.RoleValidationMiddleware(userService, "admin"), hdGetPosts)
+	router.GET("/posts/:id", middleware.ValidationMiddleware(templateRouter), middleware.AuthMiddleware(userService), middleware.RoleValidationMiddleware(userService, "admin"), hdGetPostsByID)
+	router.PUT("/posts/:id", middleware.ValidationMiddleware(templateRouter), middleware.AuthMiddleware(userService), middleware.RoleValidationMiddleware(userService, "admin"), hdUpdatePostsByID)
+	router.DELETE("/posts/:id", middleware.ValidationMiddleware(templateRouter), middleware.AuthMiddleware(userService), middleware.RoleValidationMiddleware(userService, "admin"), hdDeletePostsByID)
 }

@@ -1,9 +1,9 @@
 package router
 
 import (
-	"challenge3/middleware"
-	"challenge3/models"
-	"challenge3/services"
+	"challenge4/middleware"
+	"challenge4/models"
+	"challenge4/services"
 	"net/http"
 	"strconv"
 
@@ -15,7 +15,7 @@ var roleService services.RoleService
 func hdGetRoles(c *gin.Context) {
 	var roles []models.Role
 
-	roles, err := roleService.GetAllRoles()
+	roles, err := roleService.GetAllRole()
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
@@ -32,7 +32,7 @@ func hdCreateRole(c *gin.Context) {
 		return
 	}
 
-	role, err := roleService.SaveRole(role)
+	role, err := roleService.InsertRole(role)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
 		return
@@ -77,8 +77,8 @@ func hdDeleteRoleByID(c *gin.Context) {
 	c.JSON(http.StatusAccepted, gin.H{"message": "Role deleted"})
 }
 
-func initRoleRouter(router *gin.RouterGroup, userService services.UserService, roleService services.RoleService) {
-	roleService = roleService
+func initRoleRouter(router *gin.RouterGroup, userService services.UserService, roleservice services.RoleService) {
+	roleService = roleservice
 	router.GET("/roles", middleware.ValidationMiddleware(templateRouter), middleware.RoleValidationMiddleware(userService, "admin"), hdGetRoles)
 	router.POST("/roles", middleware.ValidationMiddleware(templateRouter), middleware.RoleValidationMiddleware(userService, "admin"), hdCreateRole)
 	router.GET("/roles/:id", middleware.ValidationMiddleware(templateRouter), middleware.RoleValidationMiddleware(userService, "admin"), hdGetRoleByID)

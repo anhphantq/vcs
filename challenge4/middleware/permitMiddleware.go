@@ -1,8 +1,8 @@
 package middleware
 
 import (
-	"challenge3/models"
-	"challenge3/services"
+	"challenge4/models"
+	"challenge4/services"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -13,7 +13,7 @@ func PermitMiddleware(srv services.UserService, permissionName string, scope str
 		tmp, _ := c.Get("user")
 		user, _ := tmp.(models.Account)
 
-		result, err := srv.CheckPermission(user.User_id, permissionName, scope)
+		result, err := srv.CheckPermission(user.Role_id, permissionName, scope)
 		if !result || err != nil {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"message": "Permission denied"})
 			return

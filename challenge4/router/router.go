@@ -1,7 +1,7 @@
 package router
 
 import (
-	"challenge3/services"
+	"challenge4/services"
 	"fmt"
 
 	"github.com/getkin/kin-openapi/openapi3"
@@ -12,7 +12,7 @@ import (
 
 var templateRouter routers.Router
 
-func InitRouter(router *gin.Engine, userService services.UserService, roleService services.RoleService) {
+func InitRouter(router *gin.Engine, userService services.UserService, roleService services.RoleService, permissionService services.PermissionService, grantService services.GrantService, postSerivce services.PostService) {
 	doc, err := openapi3.NewLoader().LoadFromFile("/Users/anhphantq/Desktop/Go/vcs/challenge3/api/api.yaml")
 	if err != nil {
 		fmt.Print(err.Error())
@@ -31,11 +31,11 @@ func InitRouter(router *gin.Engine, userService services.UserService, roleServic
 	initRoleRouter(roleRouter, userService, roleService)
 
 	grantRouter := router.Group("/granting-management")
-	initGrantRouter(grantRouter, srv)
+	initGrantRouter(grantRouter, userService, grantService)
 
 	permissionRouter := router.Group("/permission-management")
-	initPermissionRouter(permissionRouter, srv)
+	initPermissionRouter(permissionRouter, userService, permissionService)
 
 	postRouter := router.Group("/post-management")
-	InitPostRouter(postRouter, srv)
+	InitPostRouter(postRouter, userService, postSerivce)
 }

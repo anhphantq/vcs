@@ -1,9 +1,9 @@
 package router
 
 import (
-	"challenge3/middleware"
-	"challenge3/models"
-	"challenge3/services"
+	"challenge4/middleware"
+	"challenge4/models"
+	"challenge4/services"
 	"fmt"
 	"net/http"
 	"strconv"
@@ -161,7 +161,7 @@ func hdPutUser(c *gin.Context) {
 		}
 	}
 
-	user, err = userService.UpdateUser(user)
+	user, err = userService.UpdateUserByID(user)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
@@ -219,7 +219,7 @@ func hdDeleteUserById(c *gin.Context) {
 	err = userService.DeleteUserByID(uint(id))
 
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server or wrong user's ID"})
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})
 		return
 	}
 
@@ -264,7 +264,7 @@ func hdPutUserById(c *gin.Context) {
 		}
 	}
 
-	user, err = userService.UpdateUser(user)
+	user, err = userService.UpdateUserByID(user)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "Something went wrong in the server"})

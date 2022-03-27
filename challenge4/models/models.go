@@ -9,19 +9,19 @@ type Account struct {
 }
 
 type Role struct {
-	Role_id uint   `json:"role_id,string"`
+	Role_id uint   `json:"role_id,string" gorm:"primaryKey"`
 	Name    string `json:"name" binding:"required"`
 }
 
 type Permission struct {
-	Permission_id uint   `json:"permission_id,string"`
+	Permission_id uint   `json:"permission_id,string" gorm:"primaryKey"`
 	Name          string `json:"name"`
 	Scope         string `json:"scope"`
 }
 
-type RolePermission struct {
-	Role_id       uint `json:"role_id" form:"role_id"`
-	Permission_id uint `json:"permission_id" form:"permission_id"`
+type Rolepermission struct {
+	Role_id       uint `json:"role_id" form:"role_id" gorm:"primaryKey"`
+	Permission_id uint `json:"permission_id" form:"permission_id" gorm:"primaryKey"`
 }
 
 type Authentication struct {
@@ -30,7 +30,7 @@ type Authentication struct {
 }
 
 type Post struct {
-	Post_id    uint   `json:"post_id"`
+	Post_id    uint   `json:"post_id" gorm:"primaryKey"`
 	Content    string `json:"content"`
 	Created_at string `json:"created_at"`
 	Updated_at string `json:"updated_at"`

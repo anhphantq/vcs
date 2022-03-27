@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"challenge3/services"
+	"challenge4/services"
 	"net/http"
 	"strings"
 	"time"
@@ -66,7 +66,7 @@ func RoleValidationMiddleware(srv services.UserService, role string) gin.Handler
 			return
 		}
 
-		check, err := srv.CheckRole(user.User_id, role)
+		check, err := srv.CheckRole(user.Role_id, role)
 
 		if !check || err != nil {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"message": "Permission denied"})
