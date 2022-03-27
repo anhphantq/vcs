@@ -6,7 +6,6 @@ require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/getkin/kin-openapi v0.93.0
 	github.com/gin-gonic/gin v1.7.7
-	github.com/go-playground/validator/v10 v10.10.1
 	golang.org/x/crypto v0.0.0-20220321153916-2c7772ba3064
 	gorm.io/driver/postgres v1.3.1
 	gorm.io/gorm v1.23.3
@@ -19,6 +18,8 @@ require (
 	github.com/go-openapi/swag v0.19.5 // indirect
 	github.com/go-playground/locales v0.14.0 // indirect
 	github.com/go-playground/universal-translator v0.18.0 // indirect
+	github.com/go-playground/validator/v10 v10.10.1 // indirect
+	github.com/golang/mock v1.6.0 // indirect
 	github.com/golang/protobuf v1.3.3 // indirect
 	github.com/jackc/chunkreader/v2 v2.0.1 // indirect
 	github.com/jackc/pgconn v1.10.1 // indirect
