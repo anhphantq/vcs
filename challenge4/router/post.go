@@ -266,15 +266,15 @@ func hdDeletePostsByID(c *gin.Context) {
 
 func InitPostRouter(router *gin.RouterGroup, userService services.UserService, postservice services.PostService) {
 	postService = postservice
-	router.GET("/post", middleware.ValidationMiddleware(templateRouter), middleware.AuthMiddleware(userService), hdGetPost)
-	router.POST("/post", middleware.ValidationMiddleware(templateRouter), middleware.AuthMiddleware(userService), hdCreatePost)
+	router.GET("/post", middleware.ValidationMiddleware(TemplateRouter), middleware.AuthMiddleware(userService), hdGetPost)
+	router.POST("/post", middleware.ValidationMiddleware(TemplateRouter), middleware.AuthMiddleware(userService), hdCreatePost)
 
-	router.GET("/post/:id", middleware.ValidationMiddleware(templateRouter), middleware.AuthMiddleware(userService), hdGetPostByID)
-	router.PUT("/post/:id", middleware.ValidationMiddleware(templateRouter), middleware.AuthMiddleware(userService), hdUpdatePostByID)
-	router.DELETE("/post/:id", middleware.ValidationMiddleware(templateRouter), middleware.AuthMiddleware(userService), hdDeletePostByID)
+	router.GET("/post/:id", middleware.ValidationMiddleware(TemplateRouter), middleware.AuthMiddleware(userService), hdGetPostByID)
+	router.PUT("/post/:id", middleware.ValidationMiddleware(TemplateRouter), middleware.AuthMiddleware(userService), hdUpdatePostByID)
+	router.DELETE("/post/:id", middleware.ValidationMiddleware(TemplateRouter), middleware.AuthMiddleware(userService), hdDeletePostByID)
 
-	router.GET("/posts", middleware.ValidationMiddleware(templateRouter), middleware.AuthMiddleware(userService), middleware.RoleValidationMiddleware(userService, "admin"), hdGetPosts)
-	router.GET("/posts/:id", middleware.ValidationMiddleware(templateRouter), middleware.AuthMiddleware(userService), middleware.RoleValidationMiddleware(userService, "admin"), hdGetPostsByID)
-	router.PUT("/posts/:id", middleware.ValidationMiddleware(templateRouter), middleware.AuthMiddleware(userService), middleware.RoleValidationMiddleware(userService, "admin"), hdUpdatePostsByID)
-	router.DELETE("/posts/:id", middleware.ValidationMiddleware(templateRouter), middleware.AuthMiddleware(userService), middleware.RoleValidationMiddleware(userService, "admin"), hdDeletePostsByID)
+	router.GET("/posts", middleware.ValidationMiddleware(TemplateRouter), middleware.AuthMiddleware(userService), middleware.RoleValidationMiddleware(userService, "admin"), hdGetPosts)
+	router.GET("/posts/:id", middleware.ValidationMiddleware(TemplateRouter), middleware.AuthMiddleware(userService), middleware.RoleValidationMiddleware(userService, "admin"), hdGetPostsByID)
+	router.PUT("/posts/:id", middleware.ValidationMiddleware(TemplateRouter), middleware.AuthMiddleware(userService), middleware.RoleValidationMiddleware(userService, "admin"), hdUpdatePostsByID)
+	router.DELETE("/posts/:id", middleware.ValidationMiddleware(TemplateRouter), middleware.AuthMiddleware(userService), middleware.RoleValidationMiddleware(userService, "admin"), hdDeletePostsByID)
 }

@@ -77,10 +77,10 @@ func hdDeleteRoleByID(c *gin.Context) {
 	c.JSON(http.StatusAccepted, gin.H{"message": "Role deleted"})
 }
 
-func initRoleRouter(router *gin.RouterGroup, userService services.UserService, roleservice services.RoleService) {
+func InitRoleRouter(router *gin.RouterGroup, userService services.UserService, roleservice services.RoleService) {
 	roleService = roleservice
-	router.GET("/roles", middleware.ValidationMiddleware(templateRouter), middleware.RoleValidationMiddleware(userService, "admin"), hdGetRoles)
-	router.POST("/roles", middleware.ValidationMiddleware(templateRouter), middleware.RoleValidationMiddleware(userService, "admin"), hdCreateRole)
-	router.GET("/roles/:id", middleware.ValidationMiddleware(templateRouter), middleware.RoleValidationMiddleware(userService, "admin"), hdGetRoleByID)
-	router.DELETE("/roles/:id", middleware.ValidationMiddleware(templateRouter), middleware.RoleValidationMiddleware(userService, "admin"), hdDeleteRoleByID)
+	router.GET("/roles", middleware.ValidationMiddleware(TemplateRouter), middleware.RoleValidationMiddleware(userService, "admin"), hdGetRoles)
+	router.POST("/roles", middleware.ValidationMiddleware(TemplateRouter), middleware.RoleValidationMiddleware(userService, "admin"), hdCreateRole)
+	router.GET("/roles/:id", middleware.ValidationMiddleware(TemplateRouter), middleware.RoleValidationMiddleware(userService, "admin"), hdGetRoleByID)
+	router.DELETE("/roles/:id", middleware.ValidationMiddleware(TemplateRouter), middleware.RoleValidationMiddleware(userService, "admin"), hdDeleteRoleByID)
 }

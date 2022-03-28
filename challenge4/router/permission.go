@@ -78,10 +78,10 @@ func hdDeletePermissionByID(c *gin.Context) {
 	c.JSON(http.StatusAccepted, gin.H{"message": "Permission deleted"})
 }
 
-func initPermissionRouter(router *gin.RouterGroup, userService services.UserService, permissionservice services.PermissionService) {
+func InitPermissionRouter(router *gin.RouterGroup, userService services.UserService, permissionservice services.PermissionService) {
 	permissionService = permissionservice
-	router.GET("/permissions", middleware.ValidationMiddleware(templateRouter), middleware.RoleValidationMiddleware(userService, "admin"), hdGetPermission)
-	router.POST("/permissions", middleware.ValidationMiddleware(templateRouter), middleware.RoleValidationMiddleware(userService, "admin"), hdCreatePermission)
-	router.GET("/permissions/:id", middleware.ValidationMiddleware(templateRouter), middleware.RoleValidationMiddleware(userService, "admin"), hdGetPermissionByID)
-	router.DELETE("/permissions/:id", middleware.ValidationMiddleware(templateRouter), middleware.RoleValidationMiddleware(userService, "admin"), hdDeletePermissionByID)
+	router.GET("/permissions", middleware.ValidationMiddleware(TemplateRouter), middleware.RoleValidationMiddleware(userService, "admin"), hdGetPermission)
+	router.POST("/permissions", middleware.ValidationMiddleware(TemplateRouter), middleware.RoleValidationMiddleware(userService, "admin"), hdCreatePermission)
+	router.GET("/permissions/:id", middleware.ValidationMiddleware(TemplateRouter), middleware.RoleValidationMiddleware(userService, "admin"), hdGetPermissionByID)
+	router.DELETE("/permissions/:id", middleware.ValidationMiddleware(TemplateRouter), middleware.RoleValidationMiddleware(userService, "admin"), hdDeletePermissionByID)
 }

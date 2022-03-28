@@ -10,7 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var templateRouter routers.Router
+var TemplateRouter routers.Router
 
 func InitRouter(router *gin.Engine, userService services.UserService, roleService services.RoleService, permissionService services.PermissionService, grantService services.GrantService, postSerivce services.PostService) {
 	doc, err := openapi3.NewLoader().LoadFromFile("/Users/anhphantq/Desktop/Go/vcs/challenge3/api/api.yaml")
@@ -18,23 +18,23 @@ func InitRouter(router *gin.Engine, userService services.UserService, roleServic
 		fmt.Print(err.Error())
 	}
 
-	templateRouter, err = legacy.NewRouter(doc)
+	TemplateRouter, err = legacy.NewRouter(doc)
 
 	if err != nil {
 		fmt.Print(err.Error())
 	}
 
 	userRouter := router.Group("/user-management")
-	initUserRouter(userRouter, userService)
+	InitUserRouter(userRouter, userService)
 
 	roleRouter := router.Group("/role-management")
-	initRoleRouter(roleRouter, userService, roleService)
+	InitRoleRouter(roleRouter, userService, roleService)
 
 	grantRouter := router.Group("/granting-management")
-	initGrantRouter(grantRouter, userService, grantService)
+	InitGrantRouter(grantRouter, userService, grantService)
 
 	permissionRouter := router.Group("/permission-management")
-	initPermissionRouter(permissionRouter, userService, permissionService)
+	InitPermissionRouter(permissionRouter, userService, permissionService)
 
 	postRouter := router.Group("/post-management")
 	InitPostRouter(postRouter, userService, postSerivce)

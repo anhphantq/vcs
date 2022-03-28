@@ -57,9 +57,9 @@ func hdDeleteGrant(c *gin.Context) {
 	c.JSON(http.StatusAccepted, gin.H{"message": "Deleted"})
 }
 
-func initGrantRouter(router *gin.RouterGroup, userService services.UserService, grantservice services.GrantService) {
+func InitGrantRouter(router *gin.RouterGroup, userService services.UserService, grantservice services.GrantService) {
 	grantService = grantservice
-	router.GET("/granting", middleware.ValidationMiddleware(templateRouter), middleware.RoleValidationMiddleware(userService, "admin"), hdGetGrant)
-	router.POST("/granting", middleware.ValidationMiddleware(templateRouter), middleware.RoleValidationMiddleware(userService, "admin"), hdCreateGrant)
-	router.DELETE("/granting", middleware.ValidationMiddleware(templateRouter), middleware.RoleValidationMiddleware(userService, "admin"), hdDeleteGrant)
+	router.GET("/granting", middleware.ValidationMiddleware(TemplateRouter), middleware.RoleValidationMiddleware(userService, "admin"), hdGetGrant)
+	router.POST("/granting", middleware.ValidationMiddleware(TemplateRouter), middleware.RoleValidationMiddleware(userService, "admin"), hdCreateGrant)
+	router.DELETE("/granting", middleware.ValidationMiddleware(TemplateRouter), middleware.RoleValidationMiddleware(userService, "admin"), hdDeleteGrant)
 }
