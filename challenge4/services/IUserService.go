@@ -4,6 +4,8 @@ import (
 	"challenge4/models"
 	"challenge4/repositories"
 	"errors"
+
+	"golang.org/x/crypto/bcrypt"
 )
 
 type IUserSerivce struct {
@@ -27,7 +29,20 @@ func (srv *IUserSerivce) CheckEmailUsed(email string) (bool, error) {
 	return true, nil
 }
 
+func generatePassword(password string) (string, error) {
+	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
+	return string(bytes), err
+}
+
 func (srv *IUserSerivce) SaveUser(user models.Account) (models.Account, error) {
+	tmp, err := generatePassword(user.Password)
+
+	if err != nil {
+		return models.Account{}, err
+	}
+
+	user.Password = tmp
+
 	return srv.InsertUser(user)
 }
 

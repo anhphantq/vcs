@@ -1,11 +1,12 @@
-package test
+package router
 
 import (
 	"bytes"
 	mock_services "challenge4/mock"
 	"challenge4/models"
-	"challenge4/router"
 	"encoding/json"
+	"errors"
+	"log"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -38,6 +39,13 @@ func TestSignUp(t *testing.T) {
 	sampleAccount := RandomAccount()
 	sampleAccount.Role_id = 1
 
+	log.Print(sampleAccount.Password)
+	ttm, _ := generatePassword(sampleAccount.Password)
+	log.Print(ttm)
+
+	ttm, _ = generatePassword(sampleAccount.Password)
+	log.Print(ttm)
+
 	tc := []struct {
 		name         string
 		account      interface{}
@@ -45,7 +53,7 @@ func TestSignUp(t *testing.T) {
 		checkReponse func(t *testing.T, recorder *httptest.ResponseRecorder)
 	}{
 		{
-			name:    "OK",
+			name:    "Email used",
 			account: sampleAccount,
 			buildStubs: func(store *mock_services.MockUserService) {
 				store.EXPECT().CheckEmailUsed(sampleAccount.Email).Times(1).Return(true, nil)
@@ -58,6 +66,27 @@ func TestSignUp(t *testing.T) {
 			name:    "Bad account data",
 			account: gin.H{"user_id": "abc"},
 			buildStubs: func(store *mock_services.MockUserService) {
+			},
+			checkReponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
+				assert.Equal(t, http.StatusBadRequest, recorder.Code)
+			},
+		},
+		{
+			name:    "Database error when check email",
+			account: sampleAccount,
+			buildStubs: func(store *mock_services.MockUserService) {
+				store.EXPECT().CheckEmailUsed(sampleAccount.Email).Times(1).Return(false, errors.New("bad connection"))
+			},
+			checkReponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
+				assert.Equal(t, http.StatusInternalServerError, recorder.Code)
+			},
+		},
+		{
+			name:    "Database error when save user",
+			account: sampleAccount,
+			buildStubs: func(store *mock_services.MockUserService) {
+				store.EXPECT().CheckEmailUsed(sampleAccount.Email).Times(1).Return(false, nil)
+				store.EXPECT().SaveUser(sampleAccount).Times(1).Return(models.Account{}, errors.New("bad connection"))
 			},
 			checkReponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
 				assert.Equal(t, http.StatusInternalServerError, recorder.Code)
@@ -73,7 +102,7 @@ func TestSignUp(t *testing.T) {
 
 		tc[i].buildStubs(store)
 
-		router.UserService = store
+		UserService = store
 
 		w := httptest.NewRecorder()
 		c, _ := gin.CreateTestContext(w)
@@ -87,7 +116,7 @@ func TestSignUp(t *testing.T) {
 		c.Request = httptest.NewRequest(http.MethodPost, "/user-management/signup", body)
 		c.Request.Header.Add("Content-Type", "application/json")
 
-		router.SignUp(c)
+		SignUp(c)
 
 		tc[i].checkReponse(t, w)
 	}

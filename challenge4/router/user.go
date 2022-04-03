@@ -5,7 +5,6 @@ import (
 	"challenge4/models"
 	"challenge4/services"
 	"fmt"
-	"log"
 	"net/http"
 	"strconv"
 	"time"
@@ -27,10 +26,8 @@ func SignUp(c *gin.Context) {
 
 	err := c.ShouldBind(&user)
 
-	log.Print(err, "TESTT")
-
 	if err != nil {
-		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"messsage": "Something went wrong in the server"})
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"messsage": "Something went wrong in the server"})
 		return
 	}
 
@@ -43,12 +40,6 @@ func SignUp(c *gin.Context) {
 
 	if checkEmail {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "This email has been used!"})
-		return
-	}
-
-	user.Password, err = generatePassword(user.Password)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"message": "Can not generate password"})
 		return
 	}
 
