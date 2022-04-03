@@ -47,10 +47,10 @@ func TestSignUp(t *testing.T) {
 	log.Print(ttm)
 
 	tc := []struct {
-		name         string
-		account      interface{}
-		buildStubs   func(store *mock_services.MockUserService)
-		checkReponse func(t *testing.T, recorder *httptest.ResponseRecorder)
+		name          string
+		account       interface{}
+		buildStubs    func(store *mock_services.MockUserService)
+		checkResponse func(t *testing.T, recorder *httptest.ResponseRecorder)
 	}{
 		{
 			name:    "Email used",
@@ -58,7 +58,7 @@ func TestSignUp(t *testing.T) {
 			buildStubs: func(store *mock_services.MockUserService) {
 				store.EXPECT().CheckEmailUsed(sampleAccount.Email).Times(1).Return(true, nil)
 			},
-			checkReponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
+			checkResponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
 				assert.Equal(t, http.StatusBadRequest, recorder.Code)
 			},
 		},
@@ -67,7 +67,7 @@ func TestSignUp(t *testing.T) {
 			account: gin.H{"user_id": "abc"},
 			buildStubs: func(store *mock_services.MockUserService) {
 			},
-			checkReponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
+			checkResponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
 				assert.Equal(t, http.StatusBadRequest, recorder.Code)
 			},
 		},
@@ -77,7 +77,7 @@ func TestSignUp(t *testing.T) {
 			buildStubs: func(store *mock_services.MockUserService) {
 				store.EXPECT().CheckEmailUsed(sampleAccount.Email).Times(1).Return(false, errors.New("bad connection"))
 			},
-			checkReponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
+			checkResponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
 				assert.Equal(t, http.StatusInternalServerError, recorder.Code)
 			},
 		},
@@ -88,7 +88,7 @@ func TestSignUp(t *testing.T) {
 				store.EXPECT().CheckEmailUsed(sampleAccount.Email).Times(1).Return(false, nil)
 				store.EXPECT().SaveUser(sampleAccount).Times(1).Return(models.Account{}, errors.New("bad connection"))
 			},
-			checkReponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
+			checkResponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
 				assert.Equal(t, http.StatusInternalServerError, recorder.Code)
 			},
 		},
@@ -118,6 +118,6 @@ func TestSignUp(t *testing.T) {
 
 		SignUp(c)
 
-		tc[i].checkReponse(t, w)
+		tc[i].checkResponse(t, w)
 	}
 }
