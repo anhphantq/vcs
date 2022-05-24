@@ -15,6 +15,7 @@ type Account struct {
 }
 
 func main() {
+
 	var user Account
 	user.Email = "123@gmail.com"
 	user.Role_id = 2
